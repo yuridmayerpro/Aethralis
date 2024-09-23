@@ -4,35 +4,208 @@
         <title>Leaflet preview</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha384-o/2yZuJZWGJ4s/adjxVW71R+EO/LyCwdQfP5UWSgX/w87iiTXuvDZaejd3TsN7mf" crossorigin=""/>
-        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha384-okbbMvvx/qfQkmiQKfd5VifbKZ/W8p1qIsWvE1ROPUfHWsDcC8/BnHohF7vPg2T6" crossorigin=""></script>
+        
+        <!-- Incluir Google Fonts para "Great Vibes" -->
+        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+        <!-- Incluir Google Fonts para "Cinzel" -->
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+        
+        <!-- Folha de estilo do Leaflet -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+        <!-- Biblioteca para controle de camadas agrupadas -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.js"></script>
+
         <style type="text/css">
-            body {
+            /* Definir a fonte "Cinzel" e a cor #3E3E4B para todos os textos */
+            body, html, #map {
                 margin: 0;
                 padding: 0;
-            }
-
-            html, body, #map {
                 width: 100%;
                 height: 100%;
+                font-family: 'Cinzel', cursive; /* Fonte Cinzel */
+                color: #3E3E4B; /* Cor dos textos */
+            }
+
+            /* Personalizar os textos de popups e tooltips */
+            .leaflet-popup-content, .leaflet-tooltip {
+                font-family: 'Cinzel', cursive;
+                color: #3E3E4B;
+                font-size: 18px;
+            }
+
+            /* Estilo para o mapa (icones) */
+            .custom-icon {
+                font-size: 30px;
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                text-align: center;
+                font-family: 'Cinzel', cursive; /* Fonte nos ícones, se necessário */
+                color: #3E3E4B;
             }
         </style>
     </head>
     <body>
         <div id="map"></div>
         <script>
+            // Inicializar o mapa com um zoom mínimo de 4
             var map = L.map('map', {
-                attributionControl: false
-            }).setView([30.2016, 8.82785e-05], 4);
-            L.control.attribution({
-                prefix: false
-            }).addTo(map);
+                minZoom: 4,  // Configura o zoom mínimo para o mapa
+                maxZoom: 8  // Opcional: zoom máximo
+            }).setView([35.2016, 0], 4);  // Define a posição inicial e o zoom inicial
+
+            // Camada base especificada, também com zoom mínimo
             var tilesource_layer = L.tileLayer('map/{z}/{x}/{y}.png', {
-                minZoom: 3,
-                maxZoom: 8,
-                tms: false,
-                attribution: 'Created by QGIS'
+                attribution: 'Created by QGIS',
+                minZoom: 4  // Configura o zoom mínimo para a camada de tiles
             }).addTo(map);
+
+            // Função para customizar ícones baseados no emoji
+            function getCustomIcon(iconEmoji) {
+                return L.divIcon({
+                    className: 'custom-icon',
+                    html: iconEmoji,
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32],
+                    popupAnchor: [0, -32]
+                });
+            }
+
+            // Objeto para armazenar os grupos de camadas (marcadores, rotas e rios)
+            var layerGroups = {};
+
+            // Configuração inicial do controle de camadas agrupadas
+            var groupedLayersControl = L.control.groupedLayers(null, {}, {
+                groupCheckboxes: true
+            }).addTo(map);
+
+            // Função para adicionar marcador à camada correta
+            function addMarkerToLayer(marker, type) {
+                if (!layerGroups[type]) {
+                    layerGroups[type] = L.layerGroup();
+                    // Adicionar a camada ao grupo "Marcadores"
+                    groupedLayersControl.addOverlay(layerGroups[type], type, "Marcadores");
+                }
+                layerGroups[type].addLayer(marker);
+            }
+
+            // Função para adicionar rota à camada correta
+            function addRouteToLayer(layer, group) {
+                if (!layerGroups[group]) {
+                    layerGroups[group] = L.layerGroup();
+                    // Adicionar a camada ao grupo "Rotas"
+                    groupedLayersControl.addOverlay(layerGroups[group], group, "Rotas");
+                }
+                layerGroups[group].addLayer(layer);
+            }
+
+            // Função para adicionar rio à camada correta
+            function addRiverToLayer(layer, name) {
+                if (!layerGroups[name]) {
+                    layerGroups[name] = L.layerGroup();
+                    // Adicionar a camada ao grupo "Rios"
+                    groupedLayersControl.addOverlay(layerGroups[name], name, "Rios");
+                }
+                layerGroups[name].addLayer(layer);
+            }
+
+            // Função para definir o estilo das rotas com base no tipo (group)
+            function routeStyle(feature) {
+                var group = feature.properties.group;
+                var style = {
+                    color: "#000000",  // Cor padrão (preto)
+                    weight: 2,         // Espessura padrão
+                    opacity: 0.8,
+                    dashArray: '5, 5'  // Tracejado padrão
+                };
+
+                // Aplicar estilos condicionalmente com base no tipo de rota
+                if (group === 'roads') {
+                    style.color = '#8D502A';
+                    style.weight = 5;  // Roads com maior espessura
+                } else if (group === 'trails') {
+                    style.color = '#924217';
+                    style.weight = 2;  // Trails com espessura menor
+                } else if (group === 'searoutes') {
+                    style.color = '#B16925';
+                    style.weight = 3;  // Searoutes com espessura intermediária
+                }
+
+                return style;
+            }
+
+            // Função para definir o estilo dos rios
+            function riverStyle(feature) {
+                return {
+                    color: '#1E90FF',  // Cor azul clara para rios
+                    weight: feature.properties.width * 10 || 2,  // Usar a propriedade de largura para ajustar o peso da linha
+                    opacity: 0.6
+                };
+            }
+
+            // Carregar o GeoJSON dos marcadores
+            fetch('Aethralis Markers.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    pointToLayer: function (feature, latlng) {
+                        var properties = feature.properties;
+                        var marker = L.marker(latlng, {
+                            icon: getCustomIcon(properties.icon)
+                        });
+                        marker.bindPopup("<b>" + properties.name + "</b><br>" + properties.legend);
+                        marker.bindTooltip(properties.name, {
+                            permanent: false,
+                            direction: "top"
+                        });
+
+                        // Adicionar o marcador ao grupo de camadas correto
+                        addMarkerToLayer(marker, properties.type);
+
+                        return marker;
+                    }
+                });
+            })
+            .catch(error => console.error('Erro ao carregar o GeoJSON dos marcadores:', error));
+
+            // Carregar o GeoJSON das rotas
+            fetch('Aethralis Routes.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: routeStyle,  // Aplicar o estilo condicional
+                    onEachFeature: function (feature, layer) {
+                        var group = feature.properties.group;
+                        layer.bindPopup("<b>Grupo de Rota: </b>" + group);
+
+                        // Adicionar a rota ao grupo de camadas correto
+                        addRouteToLayer(layer, group);
+                    }
+                });
+            })
+            .catch(error => console.error('Erro ao carregar o GeoJSON das rotas:', error));
+
+            // Carregar o GeoJSON dos rios
+            fetch('Aethralis Rivers.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: riverStyle,  // Aplicar o estilo para rios
+                    onEachFeature: function (feature, layer) {
+                        var riverName = feature.properties.name;
+                        layer.bindPopup("<b>Rio: </b>" + riverName);
+
+                        // Adicionar o rio ao grupo de camadas correto
+                        addRiverToLayer(layer, riverName);
+                    }
+                });
+            })
+            .catch(error => console.error('Erro ao carregar o GeoJSON dos rios:', error));
+
         </script>
     </body>
 </html>
