@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Leaflet preview</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Incluir Google Fonts para "Great Vibes" -->
+        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+        <!-- Incluir Google Fonts para "Cinzel" -->
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+        
+        <!-- Folha de estilo do Leaflet -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+        <!-- Biblioteca para controle de camadas agrupadas -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.js"></script>
+
+        <style type="text/css">
+            /* Definir a fonte "Cinzel" e a cor #3E3E4B para todos os textos */
+            body, html, #map {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+                font-family: 'Cinzel', cursive; /* Fonte Cinzel */
+                color: #3E3E4B; /* Cor dos textos */
+            }
+
+            /* Personalizar os textos de popups e tooltips */
+            .leaflet-popup-content, .leaflet-tooltip {
+                font-family: 'Cinzel', cursive;
+                color: #3E3E4B;
+                font-size: 18px;
+            }
+
+            /* Estilo para o mapa (icones) */
+            .custom-icon {
+                font-size: 30px;
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                text-align: center;
+                font-family: 'Cinzel', cursive; /* Fonte nos ícones, se necessário */
+                color: #3E3E4B;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+        <script>
+            // Inicializar o mapa com um zoom mínimo de 4
+            var map = L.map('map', {
+                minZoom: 4,  // Configura o zoom mínimo para o mapa
+                maxZoom: 8  // Opcional: zoom máximo
+            }).setView([35.2016, 0], 4);  // Define a posição inicial e o zoom inicial
+
+            // Camada base especificada, também com zoom mínimo
+            var tilesource_layer = L.tileLayer('map/{z}/{x}/{y}.png', {
+                attribution: 'Created by QGIS',
+                minZoom: 4  // Configura o zoom mínimo para a camada de tiles
+            }).addTo(map);
+
+            // Objeto para armazenar os grupos de camadas (marcadores, rotas, rios e regiões)
+            var layerGroups = {};
+
+            // Configuração inicial do controle de camadas agrupadas
+            var groupedLayersControl = L.control.groupedLayers(null, {}, {
+                groupCheckboxes: true
+            }).addTo(map);
+
+            // Função para adicionar marcador à camada correta
+            function addMarkerToLayer(marker, type) {
+                if (!layerGroups[type]) {
+                    layerGroups[type] = L.layerGroup();
+                    groupedLayersControl.addOverlay(layerGroups[type], type, "Marcadores");
+                }
+                layerGroups[type].addLayer(marker);
+            }
+
+            // Função para adicionar rota à camada correta
+            function addRouteToLayer(layer, group) {
+                if (!layerGroups[group]) {
+                    layerGroups[group] = L.layerGroup();
+                    groupedLayersControl.addOverlay(layerGroups[group], group, "Rotas");
+                }
+                layerGroups[group].addLayer(layer);
+            }
+
+            // Função para adicionar rio à camada correta
+            function addRiverToLayer(layer, name) {
+                if (!layerGroups[name]) {
+                    layerGroups[name] = L.layerGroup();
+                    groupedLayersControl.addOverlay(layerGroups[name], name, "Rios");
+                }
+                layerGroups[name].addLayer(layer);
+            }
+
+            // Função para definir o estilo das rotas com base no tipo (group)
+            function routeStyle(feature) {
+                var group = feature.properties.group;
+                var style = {
+                    color: "#000000",  // Cor padrão (preto)
+                    weight: 2,         // Espessura padrão
+                    opacity: 0.8,
+                    dashArray: '5, 5'  // Tracejado padrão
+                };
+
+                if (group === 'roads') {
+                    style.color = '#8D502A';
+                    style.weight = 5;  // Roads com maior espessura
+                } else if (group === 'trails') {
+                    style.color = '#924217';
+                    style.weight = 2;  // Trails com espessura menor
+                } else if (group === 'searoutes') {
+                    style.color = '#B16925';
+                    style.weight = 3;  // Searoutes com espessura intermediária
+                }
+
+                return style;
+            }
+
+            // Função para definir o estilo dos rios
+            function riverStyle(feature) {
+                return {
+                    color: '#1E90FF',  // Cor azul clara para rios
+                    weight: feature.properties.width * 10 || 2,  // Usar a propriedade de largura para ajustar o peso da linha
+                    opacity: 0.6
+                };
+            }
+
+            // Função para gerar cores com base nos valores das propriedades
+            function getColor(attribute, value) {
+                var colors = {
+                    'biome': {
+                        0: '#2E8B57',  // Bioma 0 (oceano)
+                        12: '#A0522D',  // Bioma 12 (ilha)
+                        // Adicione outros biomas conforme necessário
+                    },
+                    'state': {
+                        0: '#FF0000',  // Estado 0
+                        1: '#0000FF',  // Estado 1
+                    },
+                    'culture': {
+                        0: '#FFA500',  // Cultura 0
+                        4: '#800080',  // Cultura 4
+                    },
+                    'religion': {
+                        0: '#FFFF00',  // Religião 0
+                    }
+                };
+
+                return colors[attribute][value] || '#808080';  // Cor padrão
+            }
+
+            // Função para criar camadas de regiões
+            function createRegionLayer(attribute) {
+                return L.geoJSON(null, {
+                    style: function (feature) {
+                        return {
+                            color: getColor(attribute, feature.properties[attribute]),
+                            fillOpacity: 0.6,
+                            weight: 1, // Adicionando borda leve
+                            opacity: 1
+                        };
+                    },
+                    onEachFeature: function (feature, layer) {
+                        // Exibir informações no popup
+                        layer.bindPopup("ID: " + feature.properties.id + "<br>" +
+                                        "Bioma: " + feature.properties.biome + "<br>" +
+                                        "Estado: " + feature.properties.state);
+                    }
+                });
+            }
+
+            // Criar as camadas de regiões antes de carregar o GeoJSON
+            var biomeLayer = createRegionLayer('biome');
+            var stateLayer = createRegionLayer('state');
+            var cultureLayer = createRegionLayer('culture');
+            var religionLayer = createRegionLayer('religion');
+
+            // Adicionar as camadas ao controle de camadas
+            groupedLayersControl.addOverlay(biomeLayer, 'Bioma', 'Regiões');
+            groupedLayersControl.addOverlay(stateLayer, 'Estado', 'Regiões');
+            groupedLayersControl.addOverlay(cultureLayer, 'Cultura', 'Regiões');
+            groupedLayersControl.addOverlay(religionLayer, 'Religião', 'Regiões');
+
+            // Carregar o GeoJSON das regiões (células)
+            fetch('Aethralis Cells.geojson')
+            .then(response => response.json())
+            .then(data => {
+                biomeLayer.addData(data);
+                stateLayer.addData(data);
+                cultureLayer.addData(data);
+                religionLayer.addData(data);
+            })
+            .catch(error => console.error('Erro ao carregar o GeoJSON das células:', error));
+
+            // Carregar o GeoJSON dos marcadores
+            fetch('Aethralis Markers.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    pointToLayer: function (feature, latlng) {
+                        var properties = feature.properties;
+                        var marker = L.marker(latlng, {
+                            icon: getCustomIcon(properties.icon)
+                        });
+                        marker.bindPopup("<b>" + properties.name + "</b><br>" + properties.legend);
+                        marker.bindTooltip(properties.name, {
+                            permanent: false,
+                            direction: "top"
+                        });
+
+                        addMarkerToLayer(marker, properties.type);
+                        return marker;
+                    }
+                });
+            })
+            .catch(error => console.error('Erro ao carregar o GeoJSON dos marcadores:', error));
+
+            // Carregar o GeoJSON das rotas
+            fetch('Aethralis Routes.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: routeStyle,
+                    onEachFeature: function (feature, layer) {
+                        var group = feature.properties.group;
+                        layer.bindPopup("<b>Grupo de Rota: </b>" + group);
+                        addRouteToLayer(layer, group);
+                    }
+                });
+            })
+            .catch(error => console.error('Erro ao carregar o GeoJSON das rotas:', error));
+
+            // Carregar o GeoJSON dos rios
+            fetch('Aethralis Rivers.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: riverStyle,
+                    onEachFeature: function (feature, layer) {
+                        var riverName = feature.properties.name;
+                        layer.bindPopup("<b>Rio: </b>" + riverName);
+                        addRiverToLayer(layer, riverName);
+                    }
+                });
+            })
+            .catch(error => console.error('Erro ao carregar o GeoJSON dos rios:', error));
+
+        </script>
+    </body>
+</html>
