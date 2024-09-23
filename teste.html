@@ -78,141 +78,14 @@
             // Objeto para armazenar os grupos de camadas (marcadores, rotas e rios)
             var layerGroups = {};
 
-            // Objeto para armazenar as cores atribuídas dinamicamente
-            var biomeColors = {};
-            var stateColors = {};
-            var cultureColors = {};
-            var religionColors = {};
-
-            // Função para gerar uma cor aleatória
-            function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-            }
-
-            // Função para gerar cores com base nos valores das propriedades de forma dinâmica
-            function getColor(attribute, value) {
-                var colorMap = {};
-
-                if (attribute === 'biome') {
-                    colorMap = biomeColors;
-                } else if (attribute === 'state') {
-                    colorMap = stateColors;
-                } else if (attribute === 'culture') {
-                    colorMap = cultureColors;
-                } else if (attribute === 'religion') {
-                    colorMap = religionColors;
-                }
-
-                if (!colorMap[value]) {
-                    colorMap[value] = getRandomColor();  // Gera uma cor aleatória se não existir
-                }
-
-                return colorMap[value];  // Retorna a cor existente ou recém-gerada
-            }
+            // Grupo de camadas para cidades
+            var cityLayerGroup = L.layerGroup();
 
             // Configuração inicial do controle de camadas agrupadas
             var groupedLayersControl = L.control.groupedLayers(null, {}, {
                 groupCheckboxes: true
             }).addTo(map);
 
-            // Função para criar a legenda
-            var legend = L.control({ position: 'bottomright' });
-            legend.onAdd = function () {
-                var div = L.DomUtil.create('div', 'legend');
-                div.innerHTML = "<h4>Legenda</h4>";
-                return div;
-            };
-            legend.addTo(map);
-
-            // Função para atualizar a legenda
-            function updateLegend(attribute, colorMap) {
-                var legendDiv = document.querySelector('.legend');
-                var html = '<h4>' + attribute.charAt(0).toUpperCase() + attribute.slice(1) + '</h4>';
-                for (var key in colorMap) {
-                    html += '<i style="background:' + colorMap[key] + '; width: 18px; height: 18px; display:inline-block;"></i> ' + key + '<br>';
-                }
-                legendDiv.innerHTML = html;
-            }
-
-            // Função para adicionar legenda de bioma, estado, cultura ou religião
-            function showLegend(attribute) {
-                if (attribute === 'biome') {
-                    updateLegend('Bioma', biomeColors);
-                } else if (attribute === 'state') {
-                    updateLegend('Estado', stateColors);
-                } else if (attribute === 'culture') {
-                    updateLegend('Cultura', cultureColors);
-                } else if (attribute === 'religion') {
-                    updateLegend('Religião', religionColors);
-                }
-            }
-
-            // Função para criar camadas de regiões
-            function createRegionLayer(attribute) {
-                return L.geoJSON(null, {
-                    style: function (feature) {
-                        return {
-                            color: getColor(attribute, feature.properties[attribute]),
-                            fillOpacity: 0.5,
-                            weight: 0.1,
-                            opacity: 0
-                        };
-                    },
-                    onEachFeature: function (feature, layer) {
-                        layer.bindPopup("ID: " + feature.properties.id + "<br>" +
-                                        "Bioma: " + feature.properties.biome + "<br>" +
-                                        "Estado: " + feature.properties.state);
-                    }
-                });
-            }
-
-            // Criar as camadas de regiões antes de carregar o GeoJSON
-            var biomeLayer = createRegionLayer('biome');
-            var stateLayer = createRegionLayer('state');
-            var cultureLayer = createRegionLayer('culture');
-            var religionLayer = createRegionLayer('religion');
-
-            // Adicionar as camadas ao controle de camadas
-            groupedLayersControl.addOverlay(biomeLayer, 'Bioma', 'Regiões');
-            groupedLayersControl.addOverlay(stateLayer, 'Estado', 'Regiões');
-            groupedLayersControl.addOverlay(cultureLayer, 'Cultura', 'Regiões');
-            groupedLayersControl.addOverlay(religionLayer, 'Religião', 'Regiões');
-
-            // Carregar o GeoJSON das regiões (células)
-            fetch('Aethralis Cells.geojson')
-            .then(response => response.json())
-            .then(data => {
-                biomeLayer.addData(data);
-                stateLayer.addData(data);
-                cultureLayer.addData(data);
-                religionLayer.addData(data);
-            })
-            .catch(error => console.error('Erro ao carregar o GeoJSON das células:', error));
-
-            // Mostrar a legenda ao selecionar a camada de bioma, estado, cultura ou religião
-            map.on('overlayadd', function (eventLayer) {
-                if (eventLayer.name === 'Bioma') {
-                    showLegend('biome');
-                } else if (eventLayer.name === 'Estado') {
-                    showLegend('state');
-                } else if (eventLayer.name === 'Cultura') {
-                    showLegend('culture');
-                } else if (eventLayer.name === 'Religião') {
-                    showLegend('religion');
-                }
-            });
-
-            // Remover a legenda quando a camada for desativada
-            map.on('overlayremove', function (eventLayer) {
-                var legendDiv = document.querySelector('.legend');
-                legendDiv.innerHTML = "<h4>Legenda</h4>";  // Limpar a legenda
-            });
-            
             // Função para adicionar marcador à camada correta
             function addMarkerToLayer(marker, type) {
                 if (!layerGroups[type]) {
@@ -276,30 +149,32 @@
                     opacity: 0.6
                 };
             }
-
-            
-            // Carregar o GeoJSON dos marcadores
-            fetch('Aethralis Markers.geojson')
+                fetch('Aethralis Markers.geojson')
             .then(response => response.json())
             .then(data => {
-                L.geoJSON(data, {
-                    pointToLayer: function (feature, latlng) {
-                        var properties = feature.properties;
-                        var marker = L.marker(latlng, {
-                            icon: getCustomIcon(properties.icon)
-                        });
-                        marker.bindPopup("<b>" + properties.name + "</b><br>" + properties.legend);
-                        marker.bindTooltip(properties.name, {
-                            permanent: false,
-                            direction: "top"
-                        });
+            L.geoJSON(data, {
+            pointToLayer: function (feature, latlng) {
+                var properties = feature.properties || {}; // Garantir que 'properties' exista
+                var markerName = properties.Name || "Nome não definido"; // Verifica se o nome está presente
+                var markerNote = properties.Note || "Sem descrição disponível"; // Verifica se a descrição está presente
+                var markerIcon = properties.Icon || "⚠️"; // Definir um ícone padrão, se o ícone estiver ausente
 
-                        // Adicionar o marcador ao grupo de camadas correto
-                        addMarkerToLayer(marker, properties.type);
-
-                        return marker;
-                    }
+                var marker = L.marker(latlng, {
+                    icon: getCustomIcon(markerIcon)
                 });
+
+                marker.bindPopup("<b>" + markerName + "</b><br>" + markerNote);
+                marker.bindTooltip(markerName, {
+                    permanent: false,
+                    direction: "top"
+                });
+
+                // Adicionar o marcador ao grupo de camadas correto
+                addMarkerToLayer(marker, properties.Type || "Desconhecido");
+
+                return marker;
+            }
+            });
             })
             .catch(error => console.error('Erro ao carregar o GeoJSON dos marcadores:', error));
 
@@ -336,6 +211,120 @@
                 });
             })
             .catch(error => console.error('Erro ao carregar o GeoJSON dos rios:', error));
+
+
+
+
+
+
+
+
+
+            // Grupos de camadas para Capitais e Não Capitais
+            var capitalLayerGroup = L.layerGroup();
+            var nonCapitalLayerGroup = L.layerGroup();
+
+            // Função para customizar ícones de cidades (ponto ou estrela) e o nome da cidade
+            function getCityIcon(cityName, isCapital) {
+                if (isCapital) {
+                    // Ícone de estrela para capital e nome em negrito
+                    return L.divIcon({
+                        className: 'custom-city-icon', // Classe CSS personalizada para o estilo do ícone
+                        html: `<div class="city-star">★</div><div class="city-name-bold">${cityName}</div>`, // Estrela e nome em negrito
+                        iconSize: [60, 30], // Tamanho total do ícone
+                        iconAnchor: [12, 10], // Ponto de ancoragem do ícone
+                        popupAnchor: [0, -10] // Onde o popup deve aparecer, em relação ao ícone
+                    });
+                } else {
+                    // Ícone de ponto para cidades normais
+                    return L.divIcon({
+                        className: 'custom-city-icon', // Classe CSS personalizada para o estilo do ícone
+                        html: `<div class="city-point"></div><div class="city-name">${cityName}</div>`, // Ponto e nome normal
+                        iconSize: [50, 20], // Tamanho total do ícone
+                        iconAnchor: [12, 10], // Ponto de ancoragem do ícone
+                        popupAnchor: [0, -10] // Onde o popup deve aparecer, em relação ao ícone
+                    });
+                }
+            }
+
+            // Adicionar CSS para o estilo dos pontos, estrelas e nomes
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .custom-city-icon {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .city-point {
+                    width: 8px;
+                    height: 8px;
+                    background-color: #000; /* Cor do ponto (preto) */
+                    border-radius: 50%;
+                    margin-right: 5px; /* Espaço entre o ponto e o nome da cidade */
+                }
+
+                .city-star {
+                    color: gold; /* Cor da estrela (dourado) */
+                    font-size: 14px; /* Tamanho da estrela */
+                    margin-right: 5px; /* Espaço entre a estrela e o nome da cidade */
+                }
+
+                .city-name {
+                    font-size: 12px;
+                    color: #3E3E4B; /* Cor do texto (nome da cidade) */
+                    font-family: 'Cinzel', serif; /* Estilo de fonte */
+                    font-weight: bold; /* Nome em negrito */
+                }
+
+                .city-name-bold {
+                    font-size: 12px;
+                    color: #3E3E4B;
+                    font-family: 'Cinzel', serif;
+                    font-weight: bold; /* Nome em negrito para capitais */
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Carregar o GeoJSON das cidades
+            fetch('Aethralis Burgs.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    pointToLayer: function (feature, latlng) {
+                        var properties = feature.properties || {}; // Garantir que 'properties' exista
+                        var cityName = properties.Burg || "Nome não definido"; // Nome da cidade
+                        var isCapital = properties.Capital !== null; // Verificar se a cidade é capital
+                        
+                        var marker = L.marker(latlng, {
+                            icon: getCityIcon(cityName, isCapital) // Usando o ícone de ponto ou estrela
+                        });
+
+                        var cityPopupContent = "<b>Cidade: " + cityName + "</b><br>" +
+                                            "Província: " + (properties.Province || "Província não definida") + "<br>" +
+                                            "Estado: " + (properties.State || "Estado não definido") + "<br>" +
+                                            "Cultura: " + (properties.Culture || "Cultura não definida") + "<br>" +
+                                            "Religião: " + (properties.Religion || "Religião não definida") + "<br>" +
+                                            "População: " + (properties.Population || "População não definida");
+
+                        marker.bindPopup(cityPopupContent);
+
+                        // Adicionar o marcador ao grupo de capitais ou não capitais
+                        if (isCapital) {
+                            capitalLayerGroup.addLayer(marker); // Adicionar ao grupo de capitais
+                        } else {
+                            nonCapitalLayerGroup.addLayer(marker); // Adicionar ao grupo de não capitais
+                        }
+
+                        return marker;
+                    }
+                });
+            })
+            .catch(error => console.error('Erro ao carregar o GeoJSON das cidades:', error));
+
+            // Adicionar os grupos de capitais e não capitais ao controle de camadas
+            groupedLayersControl.addOverlay(capitalLayerGroup, "Capitais", "Cidades");
+            groupedLayersControl.addOverlay(nonCapitalLayerGroup, "Não Capitais", "Cidades");
+
 
         </script>
     </body>
