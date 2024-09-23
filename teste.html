@@ -20,29 +20,31 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.js"></script>
 
         <style type="text/css">
+            /* Definir a fonte "Cinzel" e a cor #3E3E4B para todos os textos */
             body, html, #map {
                 margin: 0;
                 padding: 0;
                 width: 100%;
                 height: 100%;
-                font-family: 'Cinzel', cursive;
-                color: #3E3E4B;
-                background-color: #c4bb9d;
+                font-family: 'Cinzel', cursive; /* Fonte Cinzel */
+                color: #3E3E4B; /* Cor dos textos */
             }
 
+            /* Personalizar os textos de popups e tooltips */
             .leaflet-popup-content, .leaflet-tooltip {
                 font-family: 'Cinzel', cursive;
                 color: #3E3E4B;
                 font-size: 18px;
             }
 
+            /* Estilo para o mapa (icones) */
             .custom-icon {
                 font-size: 30px;
                 width: 32px;
                 height: 32px;
                 line-height: 32px;
                 text-align: center;
-                font-family: 'Cinzel', cursive;
+                font-family: 'Cinzel', cursive; /* Fonte nos ícones, se necessário */
                 color: #3E3E4B;
             }
         </style>
@@ -52,15 +54,29 @@
         <script>
             // Inicializar o mapa com um zoom mínimo de 4
             var map = L.map('map', {
-                minZoom: 4,  
-                maxZoom: 8  
-            }).setView([35.2016, 0], 4);  
+                minZoom: 4,  // Configura o zoom mínimo para o mapa
+                maxZoom: 8  // Opcional: zoom máximo
+            }).setView([35.2016, 0], 4);  // Define a posição inicial e o zoom inicial
 
-            // Camada base especificada
+            // Camada base especificada, também com zoom mínimo
             var tilesource_layer = L.tileLayer('map/{z}/{x}/{y}.png', {
                 attribution: 'Created by QGIS',
-                minZoom: 4  
+                minZoom: 4  // Configura o zoom mínimo para a camada de tiles
             }).addTo(map);
+
+            // Função para customizar ícones baseados no emoji
+            function getCustomIcon(iconEmoji) {
+                return L.divIcon({
+                    className: 'custom-icon',
+                    html: iconEmoji,
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32],
+                    popupAnchor: [0, -32]
+                });
+            }
+
+            // Objeto para armazenar os grupos de camadas (marcadores, rotas e rios)
+            var layerGroups = {};
 
             // Objeto para armazenar as cores atribuídas dinamicamente
             var biomeColors = {};
@@ -70,12 +86,12 @@
 
             // Função para gerar uma cor aleatória
             function getRandomColor() {
-                var letters = '0123456789ABCDEF';
-                var color = '#';
-                for (var i = 0; i < 6; i++) {
-                    color += letters[Math.floor(Math.random() * 16)];
-                }
-                return color;
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
             }
 
             // Função para gerar cores com base nos valores das propriedades de forma dinâmica
@@ -99,9 +115,6 @@
                 return colorMap[value];  // Retorna a cor existente ou recém-gerada
             }
 
-            // Objeto para armazenar os grupos de camadas (marcadores, rotas, rios e regiões)
-            var layerGroups = {};
-
             // Configuração inicial do controle de camadas agrupadas
             var groupedLayersControl = L.control.groupedLayers(null, {}, {
                 groupCheckboxes: true
@@ -118,86 +131,25 @@
 
             // Função para atualizar a legenda
             function updateLegend(attribute, colorMap) {
-            var legendDiv = document.querySelector('.legend');
-            var html = '<h4>' + attribute.charAt(0).toUpperCase() + attribute.slice(1) + '</h4>';
-            for (var key in colorMap) {
-                html += '<i style="background:' + colorMap[key] + '; width: 18px; height: 18px; display:inline-block;"></i> ' + key + '<br>';
-            }
-            legendDiv.innerHTML = html;
+                var legendDiv = document.querySelector('.legend');
+                var html = '<h4>' + attribute.charAt(0).toUpperCase() + attribute.slice(1) + '</h4>';
+                for (var key in colorMap) {
+                    html += '<i style="background:' + colorMap[key] + '; width: 18px; height: 18px; display:inline-block;"></i> ' + key + '<br>';
+                }
+                legendDiv.innerHTML = html;
             }
 
             // Função para adicionar legenda de bioma, estado, cultura ou religião
             function showLegend(attribute) {
-            if (attribute === 'biome') {
-            updateLegend('Bioma', biomeColors);
-            } else if (attribute === 'state') {
-            updateLegend('Estado', stateColors);
-            } else if (attribute === 'culture') {
-            updateLegend('Cultura', cultureColors);
-            } else if (attribute === 'religion') {
-            updateLegend('Religião', religionColors);
-            }
-            }
-
-
-            // Função para adicionar marcador à camada correta
-            function addMarkerToLayer(marker, type) {
-                if (!layerGroups[type]) {
-                    layerGroups[type] = L.layerGroup();
-                    groupedLayersControl.addOverlay(layerGroups[type], type, "Marcadores");
+                if (attribute === 'biome') {
+                    updateLegend('Bioma', biomeColors);
+                } else if (attribute === 'state') {
+                    updateLegend('Estado', stateColors);
+                } else if (attribute === 'culture') {
+                    updateLegend('Cultura', cultureColors);
+                } else if (attribute === 'religion') {
+                    updateLegend('Religião', religionColors);
                 }
-                layerGroups[type].addLayer(marker);
-            }
-
-            // Função para adicionar rota à camada correta
-            function addRouteToLayer(layer, group) {
-                if (!layerGroups[group]) {
-                    layerGroups[group] = L.layerGroup();
-                    groupedLayersControl.addOverlay(layerGroups[group], group, "Rotas");
-                }
-                layerGroups[group].addLayer(layer);
-            }
-
-            // Função para adicionar rio à camada correta
-            function addRiverToLayer(layer, name) {
-                if (!layerGroups[name]) {
-                    layerGroups[name] = L.layerGroup();
-                    groupedLayersControl.addOverlay(layerGroups[name], name, "Rios");
-                }
-                layerGroups[name].addLayer(layer);
-            }
-
-            // Função para definir o estilo das rotas com base no tipo (group)
-            function routeStyle(feature) {
-                var group = feature.properties.group;
-                var style = {
-                    color: "#000000",
-                    weight: 2,
-                    opacity: 0.8,
-                    dashArray: '5, 5'
-                };
-
-                if (group === 'roads') {
-                    style.color = '#8D502A';
-                    style.weight = 5;
-                } else if (group === 'trails') {
-                    style.color = '#924217';
-                    style.weight = 2;
-                } else if (group === 'searoutes') {
-                    style.color = '#B16925';
-                    style.weight = 3;
-                }
-
-                return style;
-            }
-
-            // Função para definir o estilo dos rios
-            function riverStyle(feature) {
-                return {
-                    color: '#1E90FF',
-                    weight: feature.properties.width * 10 || 2,
-                    opacity: 0.6
-                };
             }
 
             // Função para criar camadas de regiões
@@ -244,23 +196,88 @@
 
             // Mostrar a legenda ao selecionar a camada de bioma, estado, cultura ou religião
             map.on('overlayadd', function (eventLayer) {
-            if (eventLayer.name === 'Bioma') {
-            showLegend('biome');
-            } else if (eventLayer.name === 'Estado') {
-            showLegend('state');
-            } else if (eventLayer.name === 'Cultura') {
-            showLegend('culture');
-            } else if (eventLayer.name === 'Religião') {
-            showLegend('religion');
-            }
+                if (eventLayer.name === 'Bioma') {
+                    showLegend('biome');
+                } else if (eventLayer.name === 'Estado') {
+                    showLegend('state');
+                } else if (eventLayer.name === 'Cultura') {
+                    showLegend('culture');
+                } else if (eventLayer.name === 'Religião') {
+                    showLegend('religion');
+                }
             });
 
             // Remover a legenda quando a camada for desativada
             map.on('overlayremove', function (eventLayer) {
-            var legendDiv = document.querySelector('.legend');
-            legendDiv.innerHTML = "<h4>Legenda</h4>";  // Limpar a legenda
+                var legendDiv = document.querySelector('.legend');
+                legendDiv.innerHTML = "<h4>Legenda</h4>";  // Limpar a legenda
             });
+            
+            // Função para adicionar marcador à camada correta
+            function addMarkerToLayer(marker, type) {
+                if (!layerGroups[type]) {
+                    layerGroups[type] = L.layerGroup();
+                    // Adicionar a camada ao grupo "Marcadores"
+                    groupedLayersControl.addOverlay(layerGroups[type], type, "Marcadores");
+                }
+                layerGroups[type].addLayer(marker);
+            }
 
+            // Função para adicionar rota à camada correta
+            function addRouteToLayer(layer, group) {
+                if (!layerGroups[group]) {
+                    layerGroups[group] = L.layerGroup();
+                    // Adicionar a camada ao grupo "Rotas"
+                    groupedLayersControl.addOverlay(layerGroups[group], group, "Rotas");
+                }
+                layerGroups[group].addLayer(layer);
+            }
+
+            // Função para adicionar rio à camada correta
+            function addRiverToLayer(layer, name) {
+                if (!layerGroups[name]) {
+                    layerGroups[name] = L.layerGroup();
+                    // Adicionar a camada ao grupo "Rios"
+                    groupedLayersControl.addOverlay(layerGroups[name], name, "Rios");
+                }
+                layerGroups[name].addLayer(layer);
+            }
+
+            // Função para definir o estilo das rotas com base no tipo (group)
+            function routeStyle(feature) {
+                var group = feature.properties.group;
+                var style = {
+                    color: "#000000",  // Cor padrão (preto)
+                    weight: 2,         // Espessura padrão
+                    opacity: 0.8,
+                    dashArray: '5, 5'  // Tracejado padrão
+                };
+
+                // Aplicar estilos condicionalmente com base no tipo de rota
+                if (group === 'roads') {
+                    style.color = '#8D502A';
+                    style.weight = 5;  // Roads com maior espessura
+                } else if (group === 'trails') {
+                    style.color = '#924217';
+                    style.weight = 2;  // Trails com espessura menor
+                } else if (group === 'searoutes') {
+                    style.color = '#B16925';
+                    style.weight = 3;  // Searoutes com espessura intermediária
+                }
+
+                return style;
+            }
+
+            // Função para definir o estilo dos rios
+            function riverStyle(feature) {
+                return {
+                    color: '#1E90FF',  // Cor azul clara para rios
+                    weight: feature.properties.width * 10 || 2,  // Usar a propriedade de largura para ajustar o peso da linha
+                    opacity: 0.6
+                };
+            }
+
+            
             // Carregar o GeoJSON dos marcadores
             fetch('Aethralis Markers.geojson')
             .then(response => response.json())
@@ -277,7 +294,9 @@
                             direction: "top"
                         });
 
+                        // Adicionar o marcador ao grupo de camadas correto
                         addMarkerToLayer(marker, properties.type);
+
                         return marker;
                     }
                 });
@@ -289,10 +308,12 @@
             .then(response => response.json())
             .then(data => {
                 L.geoJSON(data, {
-                    style: routeStyle,
+                    style: routeStyle,  // Aplicar o estilo condicional
                     onEachFeature: function (feature, layer) {
                         var group = feature.properties.group;
                         layer.bindPopup("<b>Grupo de Rota: </b>" + group);
+
+                        // Adicionar a rota ao grupo de camadas correto
                         addRouteToLayer(layer, group);
                     }
                 });
@@ -304,10 +325,12 @@
             .then(response => response.json())
             .then(data => {
                 L.geoJSON(data, {
-                    style: riverStyle,
+                    style: riverStyle,  // Aplicar o estilo para rios
                     onEachFeature: function (feature, layer) {
                         var riverName = feature.properties.name;
                         layer.bindPopup("<b>Rio: </b>" + riverName);
+
+                        // Adicionar o rio ao grupo de camadas correto
                         addRiverToLayer(layer, riverName);
                     }
                 });
