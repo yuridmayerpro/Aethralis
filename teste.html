@@ -1,331 +1,41 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Leaflet preview</title>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <!-- Incluir Google Fonts para "Great Vibes" -->
-        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aethralis Map</title>
 
-        <!-- Incluir Google Fonts para "Cinzel" -->
-        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-        
-        <!-- Folha de estilo do Leaflet -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <!-- Incluir Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
-        <!-- Biblioteca para controle de camadas agrupadas -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.css"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.js"></script>
+    <!-- Incluir o CSS personalizado -->
+    <link rel="stylesheet" href="css/styles.css">
 
-        <style type="text/css">
-            /* Definir a fonte "Cinzel" e a cor #3E3E4B para todos os textos */
-            body, html, #map {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                height: 100%;
-                font-family: 'Cinzel', cursive; /* Fonte Cinzel */
-                color: #3E3E4B; /* Cor dos textos */
-            }
+    <!-- Folha de estilo do Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
 
-            /* Personalizar os textos de popups e tooltips */
-            .leaflet-popup-content, .leaflet-tooltip {
-                font-family: 'Cinzel', cursive;
-                color: #3E3E4B;
-                font-size: 18px;
-            }
+    <!-- Biblioteca para controle de camadas agrupadas -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.css"/>
+</head>
+<body>
+    <div id="map"></div>
 
-            /* Estilo para o mapa (icones) */
-            .custom-icon {
-                font-size: 30px;
-                width: 32px;
-                height: 32px;
-                line-height: 32px;
-                text-align: center;
-                font-family: 'Cinzel', cursive; /* Fonte nos ícones, se necessário */
-                color: #3E3E4B;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="map"></div>
-        <script>
-            // Inicializar o mapa com um zoom mínimo de 4
-            var map = L.map('map', {
-                minZoom: 4,  // Configura o zoom mínimo para o mapa
-                maxZoom: 8  // Opcional: zoom máximo
-            }).setView([35.2016, 0], 4);  // Define a posição inicial e o zoom inicial
+    <!-- Scripts do Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.js"></script>
 
-            // Camada base especificada, também com zoom mínimo
-            var tilesource_layer = L.tileLayer('map/{z}/{x}/{y}.png', {
-                attribution: 'Created by QGIS',
-                minZoom: 4  // Configura o zoom mínimo para a camada de tiles
-            }).addTo(map);
+    <!-- Scripts separados -->
+    <script src="js/map.js"></script>
+    <script src="js/layers.js"></script>
+    <script src="js/geojsonLoaders.js"></script>
 
-            // Função para customizar ícones baseados no emoji
-            function getCustomIcon(iconEmoji) {
-                return L.divIcon({
-                    className: 'custom-icon',
-                    html: iconEmoji,
-                    iconSize: [32, 32],
-                    iconAnchor: [16, 32],
-                    popupAnchor: [0, -32]
-                });
-            }
-
-            // Objeto para armazenar os grupos de camadas (marcadores, rotas e rios)
-            var layerGroups = {};
-
-            // Grupo de camadas para cidades
-            var cityLayerGroup = L.layerGroup();
-
-            // Configuração inicial do controle de camadas agrupadas
-            var groupedLayersControl = L.control.groupedLayers(null, {}, {
-                groupCheckboxes: true
-            }).addTo(map);
-
-            // Função para adicionar marcador à camada correta
-            function addMarkerToLayer(marker, type) {
-                if (!layerGroups[type]) {
-                    layerGroups[type] = L.layerGroup();
-                    // Adicionar a camada ao grupo "Marcadores"
-                    groupedLayersControl.addOverlay(layerGroups[type], type, "Marcadores");
-                }
-                layerGroups[type].addLayer(marker);
-            }
-
-            // Função para adicionar rota à camada correta
-            function addRouteToLayer(layer, group) {
-                if (!layerGroups[group]) {
-                    layerGroups[group] = L.layerGroup();
-                    // Adicionar a camada ao grupo "Rotas"
-                    groupedLayersControl.addOverlay(layerGroups[group], group, "Rotas");
-                }
-                layerGroups[group].addLayer(layer);
-            }
-
-            // Função para adicionar rio à camada correta
-            function addRiverToLayer(layer, name) {
-                if (!layerGroups[name]) {
-                    layerGroups[name] = L.layerGroup();
-                    // Adicionar a camada ao grupo "Rios"
-                    groupedLayersControl.addOverlay(layerGroups[name], name, "Rios");
-                }
-                layerGroups[name].addLayer(layer);
-            }
-
-            // Função para definir o estilo das rotas com base no tipo (group)
-            function routeStyle(feature) {
-                var group = feature.properties.group;
-                var style = {
-                    color: "#000000",  // Cor padrão (preto)
-                    weight: 2,         // Espessura padrão
-                    opacity: 0.8,
-                    dashArray: '5, 5'  // Tracejado padrão
-                };
-
-                // Aplicar estilos condicionalmente com base no tipo de rota
-                if (group === 'roads') {
-                    style.color = '#8D502A';
-                    style.weight = 5;  // Roads com maior espessura
-                } else if (group === 'trails') {
-                    style.color = '#924217';
-                    style.weight = 2;  // Trails com espessura menor
-                } else if (group === 'searoutes') {
-                    style.color = '#B16925';
-                    style.weight = 3;  // Searoutes com espessura intermediária
-                }
-
-                return style;
-            }
-
-            // Função para definir o estilo dos rios
-            function riverStyle(feature) {
-                return {
-                    color: '#1E90FF',  // Cor azul clara para rios
-                    weight: feature.properties.width * 10 || 2,  // Usar a propriedade de largura para ajustar o peso da linha
-                    opacity: 0.6
-                };
-            }
-                fetch('Aethralis Markers.geojson')
-            .then(response => response.json())
-            .then(data => {
-            L.geoJSON(data, {
-            pointToLayer: function (feature, latlng) {
-                var properties = feature.properties || {}; // Garantir que 'properties' exista
-                var markerName = properties.Name || "Nome não definido"; // Verifica se o nome está presente
-                var markerNote = properties.Note || "Sem descrição disponível"; // Verifica se a descrição está presente
-                var markerIcon = properties.Icon || "⚠️"; // Definir um ícone padrão, se o ícone estiver ausente
-
-                var marker = L.marker(latlng, {
-                    icon: getCustomIcon(markerIcon)
-                });
-
-                marker.bindPopup("<b>" + markerName + "</b><br>" + markerNote);
-                marker.bindTooltip(markerName, {
-                    permanent: false,
-                    direction: "top"
-                });
-
-                // Adicionar o marcador ao grupo de camadas correto
-                addMarkerToLayer(marker, properties.Type || "Desconhecido");
-
-                return marker;
-            }
-            });
-            })
-            .catch(error => console.error('Erro ao carregar o GeoJSON dos marcadores:', error));
-
-            // Carregar o GeoJSON das rotas
-            fetch('Aethralis Routes.geojson')
-            .then(response => response.json())
-            .then(data => {
-                L.geoJSON(data, {
-                    style: routeStyle,  // Aplicar o estilo condicional
-                    onEachFeature: function (feature, layer) {
-                        var group = feature.properties.group;
-                        layer.bindPopup("<b>Grupo de Rota: </b>" + group);
-
-                        // Adicionar a rota ao grupo de camadas correto
-                        addRouteToLayer(layer, group);
-                    }
-                });
-            })
-            .catch(error => console.error('Erro ao carregar o GeoJSON das rotas:', error));
-
-            // Carregar o GeoJSON dos rios
-            fetch('Aethralis Rivers.geojson')
-            .then(response => response.json())
-            .then(data => {
-                L.geoJSON(data, {
-                    style: riverStyle,  // Aplicar o estilo para rios
-                    onEachFeature: function (feature, layer) {
-                        var riverName = feature.properties.name;
-                        layer.bindPopup("<b>Rio: </b>" + riverName);
-
-                        // Adicionar o rio ao grupo de camadas correto
-                        addRiverToLayer(layer, riverName);
-                    }
-                });
-            })
-            .catch(error => console.error('Erro ao carregar o GeoJSON dos rios:', error));
-
-
-
-
-
-
-
-
-
-            // Grupos de camadas para Capitais e Não Capitais
-            var capitalLayerGroup = L.layerGroup();
-            var nonCapitalLayerGroup = L.layerGroup();
-
-            // Função para customizar ícones de cidades (ponto ou estrela) e o nome da cidade
-            function getCityIcon(cityName, isCapital) {
-                if (isCapital) {
-                    // Ícone de estrela para capital e nome em negrito
-                    return L.divIcon({
-                        className: 'custom-city-icon', // Classe CSS personalizada para o estilo do ícone
-                        html: `<div class="city-star">★</div><div class="city-name-bold">${cityName}</div>`, // Estrela e nome em negrito
-                        iconSize: [60, 30], // Tamanho total do ícone
-                        iconAnchor: [12, 10], // Ponto de ancoragem do ícone
-                        popupAnchor: [0, -10] // Onde o popup deve aparecer, em relação ao ícone
-                    });
-                } else {
-                    // Ícone de ponto para cidades normais
-                    return L.divIcon({
-                        className: 'custom-city-icon', // Classe CSS personalizada para o estilo do ícone
-                        html: `<div class="city-point"></div><div class="city-name">${cityName}</div>`, // Ponto e nome normal
-                        iconSize: [50, 20], // Tamanho total do ícone
-                        iconAnchor: [12, 10], // Ponto de ancoragem do ícone
-                        popupAnchor: [0, -10] // Onde o popup deve aparecer, em relação ao ícone
-                    });
-                }
-            }
-
-            // Adicionar CSS para o estilo dos pontos, estrelas e nomes
-            const style = document.createElement('style');
-            style.innerHTML = `
-                .custom-city-icon {
-                    display: flex;
-                    align-items: center;
-                }
-
-                .city-point {
-                    width: 8px;
-                    height: 8px;
-                    background-color: #000; /* Cor do ponto (preto) */
-                    border-radius: 50%;
-                    margin-right: 5px; /* Espaço entre o ponto e o nome da cidade */
-                }
-
-                .city-star {
-                    color: gold; /* Cor da estrela (dourado) */
-                    font-size: 14px; /* Tamanho da estrela */
-                    margin-right: 5px; /* Espaço entre a estrela e o nome da cidade */
-                }
-
-                .city-name {
-                    font-size: 12px;
-                    color: #3E3E4B; /* Cor do texto (nome da cidade) */
-                    font-family: 'Cinzel', serif; /* Estilo de fonte */
-                    font-weight: bold; /* Nome em negrito */
-                }
-
-                .city-name-bold {
-                    font-size: 12px;
-                    color: #3E3E4B;
-                    font-family: 'Cinzel', serif;
-                    font-weight: bold; /* Nome em negrito para capitais */
-                }
-            `;
-            document.head.appendChild(style);
-
-            // Carregar o GeoJSON das cidades
-            fetch('Aethralis Burgs.geojson')
-            .then(response => response.json())
-            .then(data => {
-                L.geoJSON(data, {
-                    pointToLayer: function (feature, latlng) {
-                        var properties = feature.properties || {}; // Garantir que 'properties' exista
-                        var cityName = properties.Burg || "Nome não definido"; // Nome da cidade
-                        var isCapital = properties.Capital !== null; // Verificar se a cidade é capital
-                        
-                        var marker = L.marker(latlng, {
-                            icon: getCityIcon(cityName, isCapital) // Usando o ícone de ponto ou estrela
-                        });
-
-                        var cityPopupContent = "<b>Cidade: " + cityName + "</b><br>" +
-                                            "Província: " + (properties.Province || "Província não definida") + "<br>" +
-                                            "Estado: " + (properties.State || "Estado não definido") + "<br>" +
-                                            "Cultura: " + (properties.Culture || "Cultura não definida") + "<br>" +
-                                            "Religião: " + (properties.Religion || "Religião não definida") + "<br>" +
-                                            "População: " + (properties.Population || "População não definida");
-
-                        marker.bindPopup(cityPopupContent);
-
-                        // Adicionar o marcador ao grupo de capitais ou não capitais
-                        if (isCapital) {
-                            capitalLayerGroup.addLayer(marker); // Adicionar ao grupo de capitais
-                        } else {
-                            nonCapitalLayerGroup.addLayer(marker); // Adicionar ao grupo de não capitais
-                        }
-
-                        return marker;
-                    }
-                });
-            })
-            .catch(error => console.error('Erro ao carregar o GeoJSON das cidades:', error));
-
-            // Adicionar os grupos de capitais e não capitais ao controle de camadas
-            groupedLayersControl.addOverlay(capitalLayerGroup, "Capitais", "Cidades");
-            groupedLayersControl.addOverlay(nonCapitalLayerGroup, "Não Capitais", "Cidades");
-
-
-        </script>
-    </body>
+    <!-- Inicializar as funções de carregamento de camadas -->
+    <script>
+        loadMarkers();   // Carregar os marcadores
+        loadRoutes();    // Carregar as rotas
+        loadRivers();    // Carregar os rios
+        loadCities();    // Carregar as cidades
+    </script>
+</body>
 </html>
