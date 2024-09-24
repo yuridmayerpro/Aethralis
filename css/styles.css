@@ -54,8 +54,36 @@ body, html, #map {
 }
 
 .city-name-bold {
-    font-size: 12px;
+    font-size: 15px;
     color: #3E3E4B;
     font-family: 'Cinzel', serif;
     font-weight: bold;
+}
+
+.biome-legend {
+    background-color: white;
+    padding: 10px;
+    line-height: 18px;
+    color: #333;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    position: absolute;
+    bottom: 10px;  /* Posiciona a legenda no rodapé */
+    right: 10px;  /* Posiciona a legenda à direita */
+    z-index: 0;  /* Coloca a legenda abaixo do seletor de camadas */
+}
+
+.biome-legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+    background-color: white;
+    border-radius: 3px;
+}
+
+.leaflet-control-layers {
+    z-index: 1000;  /* Prioridade mais alta para garantir que fique sobre a legenda */
+    margin-bottom: 80px;  /* Adiciona uma margem inferior para que ele fique mais acima */
 }

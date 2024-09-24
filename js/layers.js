@@ -1,11 +1,20 @@
-// Função para adicionar marcador à camada correta
-function addMarkerToLayer(marker, type) {
-    if (!layerGroups[type]) {
-        layerGroups[type] = L.layerGroup();
-        groupedLayersControl.addOverlay(layerGroups[type], type, "Marcadores");
-    }
-    layerGroups[type].addLayer(marker);
+// Função para customizar ícones baseados no emoji
+function getCustomIcon(iconEmoji) {
+    return L.divIcon({
+        className: 'custom-icon',
+        html: iconEmoji,
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+    });
 }
+
+
+// Função para adicionar marcador ao LayerGroup de Pontos de Interesse
+function addMarkerToLayer(marker) {
+    poiLayerGroup.addLayer(marker);  // Adicionar o marcador ao LayerGroup de Pontos de Interesse
+}
+
 
 // Função para adicionar rota à camada correta
 function addRouteToLayer(layer, group) {
@@ -81,3 +90,47 @@ function getCityIcon(cityName, isCapital) {
         });
     }
 }
+
+
+
+// Grupos de camadas para Capitais e Não Capitais
+var capitalLayerGroup = L.layerGroup();  // Não adicionar diretamente ao mapa
+var nonCapitalLayerGroup = L.layerGroup();  // Não adicionar diretamente ao mapa
+
+// Adicionar os grupos de camadas ao controle de camadas, sem adicioná-los ao mapa inicialmente
+groupedLayersControl.addOverlay(capitalLayerGroup, "Capitais", "Cidades");
+groupedLayersControl.addOverlay(nonCapitalLayerGroup, "Não Capitais", "Cidades");
+
+
+
+
+
+var biomeLegend;  // Variável global para a legenda
+
+// Função para exibir a legenda dos biomas
+function showBiomeLegend(biomeColors) {
+    if (!biomeLegend) {
+        biomeLegend = L.control({ position: 'bottomright' });
+
+        biomeLegend.onAdd = function () {
+            var div = L.DomUtil.create('div', 'biome-legend');
+            div.innerHTML = '<h4>Biomas</h4>';
+            for (const biomeId in biomeColors) {
+                const biome = biomeColors[biomeId];
+                div.innerHTML += `<i style="background:${biome.color}"></i> ${biome.name}<br>`;
+            }
+            return div;
+        };
+
+        biomeLegend.addTo(map);
+    }
+}
+
+// Função para esconder a legenda dos biomas
+function hideBiomeLegend() {
+    if (biomeLegend) {
+        map.removeControl(biomeLegend);
+        biomeLegend = null;
+    }
+}
+

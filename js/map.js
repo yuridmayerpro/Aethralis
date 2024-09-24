@@ -18,21 +18,4 @@ var groupedLayersControl = L.control.groupedLayers(null, {}, {
     groupCheckboxes: true
 }).addTo(map);
 
-// Função para customizar ícones baseados no emoji
-function getCustomIcon(iconEmoji) {
-    return L.divIcon({
-        className: 'custom-icon',
-        html: iconEmoji,
-        iconSize: [32, 32],
-        iconAnchor: [16, 32],
-        popupAnchor: [0, -32]
-    });
-}
 
-// Grupos de camadas para Capitais e Não Capitais
-var capitalLayerGroup = L.layerGroup();  // Não adicionar diretamente ao mapa
-var nonCapitalLayerGroup = L.layerGroup();  // Não adicionar diretamente ao mapa
-
-// Adicionar os grupos de camadas ao controle de camadas, sem adicioná-los ao mapa inicialmente
-groupedLayersControl.addOverlay(capitalLayerGroup, "Capitais", "Cidades");
-groupedLayersControl.addOverlay(nonCapitalLayerGroup, "Não Capitais", "Cidades");
