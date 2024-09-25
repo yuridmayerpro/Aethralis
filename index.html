@@ -1,22 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aethralis Map</title>
 
-    
     <!-- Incluir Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-
-    <!-- Scripts do Leaflet (deve ser carregado primeiro) -->
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.js"></script>
-
-    <!-- Incluir o CSS personalizado -->
-    <link rel="stylesheet" href="css/styles.css">
 
     <!-- Folha de estilo do Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
@@ -24,32 +16,45 @@
     <!-- Biblioteca para controle de camadas agrupadas -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.css"/>
 
+    <!-- Incluir o CSS personalizado -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Scripts do Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.js"></script>
+
+    <!-- Bibliotecas para cálculo de rotas -->
+    <script src="https://unpkg.com/rbush@2.0.2/rbush.min.js"></script>
+    <script src="https://unpkg.com/tinyqueue@2.0.3/tinyqueue.min.js"></script>
 
 </head>
 <body>
 
     <div id="map"></div>
 
-    <!-- Scripts separados -->
+    <!-- Seus scripts -->
     <script src="js/map.js"></script>
-    <script src="js/layers.js"></script>
     <script src="js/geojsonLoaders.js"></script>
+    <script src="js/layers.js"></script>
 
     <!-- Inicializar as funções de carregamento de camadas -->
     <script>
-        loadMarkers();   // Carregar os marcadores
-        loadRoutes();    // Carregar as rotas
-        loadRivers();    // Carregar os rios
-        loadCities();    // Carregar as cidades
-        loadBiomes();    // Carregar os biomas
-        loadCultures();  // Carregar as células das culturas
-        loadStates();  // Carregar as células dos estados
-        
-        //https://leafletjs.com/plugins.html#routing
+        async function initializeMap() {
+            await loadMarkers();   // Carregar os marcadores
+            await loadRoutes();    // Carregar as rotas
+            initializeDraggableMarkers(); // Inicializar marcadores de rota
+            await loadRivers();    // Carregar os rios
+            await loadCities();    // Carregar as cidades
+            await loadBiomes();    // Carregar os biomas
+            await loadCultures();  // Carregar as culturas
+            await loadStates();    // Carregar os estados
 
+            // Inicializar o controle de camadas após todas as camadas serem carregadas
+            initializeLayerControl();
+        }
+
+        // Chamar a função para inicializar o mapa
+        initializeMap();
     </script>
 </body>
 </html>
-
-
-

@@ -1,4 +1,6 @@
-// Função para customizar ícones baseados no emoji
+// Variável global para o controle de camadas
+var groupedLayersControl;
+
 function getCustomIcon(iconEmoji) {
     return L.divIcon({
         className: 'custom-icon',
@@ -9,191 +11,155 @@ function getCustomIcon(iconEmoji) {
     });
 }
 
-
-// Função para adicionar marcador ao LayerGroup de Pontos de Interesse
-function addMarkerToLayer(marker) {
-    poiLayerGroup.addLayer(marker);  // Adicionar o marcador ao LayerGroup de Pontos de Interesse
-}
-
-
-// Função para adicionar rota à camada correta
 function addRouteToLayer(layer, group) {
     if (!layerGroups[group]) {
         layerGroups[group] = L.layerGroup();
-        groupedLayersControl.addOverlay(layerGroups[group], group, "Rotas");
     }
     layerGroups[group].addLayer(layer);
 }
 
-// Função para adicionar rio à camada correta
-function addRiverToLayer(layer, name) {
-    if (!layerGroups[name]) {
-        layerGroups[name] = L.layerGroup();
-        groupedLayersControl.addOverlay(layerGroups[name], name, "Rios");
-    }
-    layerGroups[name].addLayer(layer);
-}
-
-// Função para definir o estilo das rotas com base no tipo (group)
 function routeStyle(feature) {
     var group = feature.properties.group;
     var style = {
-        color: "#000000",  // Cor padrão (preto)
-        weight: 2,         // Espessura padrão
+        color: "#000000",
+        weight: 2,
         opacity: 0.8,
-        dashArray: '5, 5'  // Tracejado padrão
+        dashArray: '5, 5'
     };
 
-    // Aplicar estilos condicionalmente com base no tipo de rota
     if (group === 'roads') {
         style.color = '#8D502A';
-        style.weight = 5;  // Roads com maior espessura
+        style.weight = 5;
     } else if (group === 'trails') {
         style.color = '#924217';
-        style.weight = 2;  // Trails com espessura menor
+        style.weight = 2;
     } else if (group === 'searoutes') {
         style.color = '#B16925';
-        style.weight = 3;  // Searoutes com espessura intermediária
+        style.weight = 3;
     }
 
     return style;
 }
 
-// Função para definir o estilo dos rios
 function riverStyle(feature) {
     return {
-        color: '#1E90FF',  // Cor azul clara para rios
-        weight: feature.properties.width * 10 || 2,  // Usar a propriedade de largura para ajustar o peso da linha
+        color: '#1E90FF',
+        weight: feature.properties.width * 10 || 2,
         opacity: 0.6
     };
 }
 
-// Função para customizar ícones de cidades (ponto ou estrela) e o nome da cidade
 function getCityIcon(cityName, isCapital) {
     if (isCapital) {
-        // Ícone de estrela para capital e nome em negrito
         return L.divIcon({
-            className: 'custom-city-icon', // Classe CSS personalizada para o estilo do ícone
-            html: `<div class="city-star">★</div><div class="city-name-bold">${cityName}</div>`, // Estrela e nome em negrito
-            iconSize: [60, 30], // Tamanho total do ícone
-            iconAnchor: [12, 10], // Ponto de ancoragem do ícone
-            popupAnchor: [0, -10] // Onde o popup deve aparecer, em relação ao ícone
+            className: 'custom-city-icon',
+            html: `<div class="city-star">★</div><div class="city-name-bold">${cityName}</div>`,
+            iconSize: [60, 30],
+            iconAnchor: [12, 10],
+            popupAnchor: [0, -10]
         });
     } else {
-        // Ícone de ponto para cidades normais
         return L.divIcon({
-            className: 'custom-city-icon', // Classe CSS personalizada para o estilo do ícone
-            html: `<div class="city-point"></div><div class="city-name">${cityName}</div>`, // Ponto e nome normal
-            iconSize: [50, 20], // Tamanho total do ícone
-            iconAnchor: [12, 10], // Ponto de ancoragem do ícone
-            popupAnchor: [0, -10] // Onde o popup deve aparecer, em relação ao ícone
+            className: 'custom-city-icon',
+            html: `<div class="city-point"></div><div class="city-name">${cityName}</div>`,
+            iconSize: [50, 20],
+            iconAnchor: [12, 10],
+            popupAnchor: [0, -10]
         });
     }
 }
 
+var capitalLayerGroup = L.layerGroup();
+var nonCapitalLayerGroup = L.layerGroup();
 
+layerGroups['Capitais'] = capitalLayerGroup;
+layerGroups['Não Capitais'] = nonCapitalLayerGroup;
 
-// Grupos de camadas para Capitais e Não Capitais
-var capitalLayerGroup = L.layerGroup();  // Não adicionar diretamente ao mapa
-var nonCapitalLayerGroup = L.layerGroup();  // Não adicionar diretamente ao mapa
+function initializeLayerControl() {
+    var baseLayers = {
+        'Mapa Base': tilesource_layer
+    };
 
-// Adicionar os grupos de camadas ao controle de camadas, sem adicioná-los ao mapa inicialmente
-groupedLayersControl.addOverlay(capitalLayerGroup, "Capitais", "Cidades");
-groupedLayersControl.addOverlay(nonCapitalLayerGroup, "Não Capitais", "Cidades");
+    var groupedOverlays = {
+        'Marcadores': {
+            'Pontos de Interesse': layerGroups['Pontos de Interesse']
+        },
+        'Transporte': {
+            'Marcadores de Rota': markersLayerGroup,
+            'Caminho Calculado': routeLayerGroup,
+            'Roads': layerGroups['roads'],
+            'Trails': layerGroups['trails'],
+            'Searoutes': layerGroups['searoutes']
+        },
+        'Sistema hídrico': {
+            'Rios': layerGroups['Rios']
+        },
+        'Cidades': {
+            'Capitais': layerGroups['Capitais'],
+            'Não Capitais': layerGroups['Não Capitais']
+        },
+        'Camadas': {
+            'Biomas': layerGroups['Biomas'],
+            'Culturas': layerGroups['Culturas'],
+            'Estados': layerGroups['Estados']
+        }
+    };
 
+    groupedLayersControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+        groupCheckboxes: true
+    }).addTo(map);
 
+    applyStylesToLayerControl();
 
+    // Atualizar a legenda conforme as camadas são ativadas/desativadas
+    map.on('overlayadd', function (event) {
+        if (event.layer === layerGroups['Biomas']) {
+            updateLegend(window.biomeColors);
+        } else if (event.layer === layerGroups['Culturas']) {
+            updateLegend(window.cultureColors);
+        } else if (event.layer === layerGroups['Estados']) {
+            updateLegend(window.stateColors);
+        }
+    });
 
+    map.on('overlayremove', function (event) {
+        if (event.layer === layerGroups['Biomas'] ||
+            event.layer === layerGroups['Culturas'] ||
+            event.layer === layerGroups['Estados']) {
+            legend.remove();
+        }
+    });
+}
 
-var biomeLegend;  // Variável global para a legenda
+function applyStylesToLayerControl() {
+    setTimeout(function() {
+        var allLabels = document.querySelectorAll('.leaflet-control-layers label');
 
-// Função para exibir a legenda dos biomas
-function showBiomeLegend(biomeColors) {
-    if (!biomeLegend) {
-        biomeLegend = L.control({ position: 'bottomleft' });
-
-        biomeLegend.onAdd = function () {
-            var div = L.DomUtil.create('div', 'biome-legend');
-            div.innerHTML = '<h4>Biomas</h4>';
-            for (const biomeId in biomeColors) {
-                const biome = biomeColors[biomeId];
-                div.innerHTML += `<i style="background:${biome.color}"></i> ${biome.name}<br>`;
+        allLabels.forEach(function(label) {
+            if (label.classList.contains('leaflet-control-layers-group-label')) {
+                var span = label.querySelector('span');
+                if (span) {
+                    span.style.fontSize = '100%';
+                    span.style.color = '#000';
+                    span.style.fontWeight = 'bold';
+                    span.style.marginLeft = '0';
+                }
+                var checkbox = label.querySelector('input[type="checkbox"]');
+                if (checkbox) {
+                    checkbox.style.marginLeft = '0';
+                }
+            } else {
+                var span = label.querySelector('span');
+                if (span) {
+                    span.style.fontSize = '90%';
+                    span.style.color = '#666';
+                    span.style.marginLeft = '15px';
+                }
+                var checkbox = label.querySelector('input[type="checkbox"]');
+                if (checkbox) {
+                    checkbox.style.marginLeft = '15px';
+                }
             }
-            return div;
-        };
-
-        biomeLegend.addTo(map);
-    }
-}
-
-// Função para esconder a legenda dos biomas
-function hideBiomeLegend() {
-    if (biomeLegend) {
-        map.removeControl(biomeLegend);
-        biomeLegend = null;
-    }
-}
-
-
-
-
-
-var cultureLegend;  // Variável global para a legenda
-
-// Função para exibir a legenda das culturas
-function showCultureLegend(cultureColors) {
-    if (!cultureLegend) {
-        cultureLegend = L.control({ position: 'bottomleft' });
-
-        cultureLegend.onAdd = function () {
-            var div = L.DomUtil.create('div', 'biome-legend');
-            div.innerHTML = '<h4>Culturas</h4>';
-            for (const cultureId in cultureColors) {
-                const culture = cultureColors[cultureId];
-                div.innerHTML += `<i style="background:${culture.color}"></i> ${culture.name}<br>`;
-            }
-            return div;
-        };
-
-        cultureLegend.addTo(map);
-    }
-}
-
-// Função para esconder a legenda das culturas
-function hideCultureLegend() {
-    if (cultureLegend) {
-        map.removeControl(cultureLegend);
-        cultureLegend = null;
-    }
-}
-
-
-
-var stateLegend;  // Variável global para a legenda
-
-// Função para exibir a legenda dos estados
-function showStateLegend(stateColors) {
-    if (!stateLegend) {
-        stateLegend = L.control({ position: 'bottomleft' });  // Posição ajustada para a esquerda
-
-        stateLegend.onAdd = function () {
-            var div = L.DomUtil.create('div', 'state-legend');
-            div.innerHTML = '<h4>Estados</h4>';
-            for (const stateId in stateColors) {
-                const state = stateColors[stateId];
-                div.innerHTML += `<i style="background:${state.color}"></i> ${state.name}<br>`;
-            }
-            return div;
-        };
-
-        stateLegend.addTo(map);
-    }
-}
-
-// Função para esconder a legenda dos estados
-function hideStateLegend() {
-    if (stateLegend) {
-        map.removeControl(stateLegend);
-        stateLegend = null;
-    }
+        });
+    }, 100);
 }
