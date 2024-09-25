@@ -1,0 +1,1776 @@
+{
+  "type": "FeatureCollection",
+  "name": "Aethralis Markers",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker0",
+        "Type": "vulcões",
+        "Icon": "🌋",
+        "Name": "Romney",
+        "Note": "Vulcão em erupção.Altura: 4761 m.",
+        "X": 419.99,
+        "Y": 63.66,
+        "Latitude": 55.75,
+        "Longitude": -35.21
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -35.21,
+          55.75
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker1",
+        "Type": "Soldições quentes",
+        "Icon": "♨️",
+        "Name": "Fontes termais de Atopkoy",
+        "Note": "Uma nasces geotérmicas com água naturalmente aquecida que proporciona relaxamento e benefícios medicinais.A temperatura média é de 25 ° C.",
+        "X": 650.26,
+        "Y": 569.6,
+        "Latitude": 22.76,
+        "Longitude": -20.2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -20.2,
+          22.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker2",
+        "Type": "fontes de água",
+        "Icon": "💧",
+        "Name": "Kormansuze encantou o reservatório",
+        "Note": "Essa lendária fonte de água é sussurrada em contos antigos e que se acredita possuir propriedades místicas.A primavera emana de água cristalina, cintilando com uma iridescência sobrenatural que brilha mesmo na luz mais diminuída.",
+        "X": 717.84,
+        "Y": 276.93,
+        "Latitude": 41.84,
+        "Longitude": -15.79
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -15.79,
+          41.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker3",
+        "Type": "minas",
+        "Icon": "⛏️",
+        "Name": "ALTAZOPUZ - CIDADE DE MINERAÇÃO DE PRATA",
+        "Note": "Altazopuz é uma cidade mineira de 10010 pessoas perto da mina de prata.",
+        "X": 1069.25,
+        "Y": 474.92,
+        "Latitude": 28.93,
+        "Longitude": 7.12
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.12,
+          28.93
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker4",
+        "Type": "minas",
+        "Icon": "⛏️",
+        "Name": "Elenlerkor - Salt Mining Town",
+        "Note": "Elenlerkor é uma cidade mineira de 9535 pessoas perto da mina de sal.",
+        "X": 845.42,
+        "Y": 511.54,
+        "Latitude": 26.55,
+        "Longitude": -7.47
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.47,
+          26.55
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker5",
+        "Type": "minas",
+        "Icon": "⛏️",
+        "Name": "ASLANKAKA - CIDADE DE MINERAÇÃO DE PRATA",
+        "Note": "Aslankaka é uma cidade mineira de 11273 pessoas perto da mina de prata.",
+        "X": 498.88,
+        "Y": 276.06,
+        "Latitude": 41.9,
+        "Longitude": -30.07
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -30.07,
+          41.9
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker6",
+        "Type": "minas",
+        "Icon": "⛏️",
+        "Name": "Shiz - Silver Mining Town",
+        "Note": "Shiz é uma cidade mineira de 982 pessoas perto da mina de prata.",
+        "X": 469.81,
+        "Y": 226.84,
+        "Latitude": 45.11,
+        "Longitude": -31.96
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -31.96,
+          45.11
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker7",
+        "Type": "minas",
+        "Icon": "⛏️",
+        "Name": "Zarabilgab - Cidade de mineração principal",
+        "Note": "Zarabilgab é uma cidade mineira de 4773 pessoas perto da mina principal.",
+        "X": 438.76,
+        "Y": 122.66,
+        "Latitude": 51.9,
+        "Longitude": -33.99
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -33.99,
+          51.9
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker8",
+        "Type": "minas",
+        "Icon": "⛏️",
+        "Name": "Yelkadale - Iron Mining Town",
+        "Note": "Yelkadale é uma cidade mineira de 1528 pessoas perto da mina de ferro.",
+        "X": 898.6,
+        "Y": 278.98,
+        "Latitude": 41.71,
+        "Longitude": -4.0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.0,
+          41.71
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker9",
+        "Type": "minas",
+        "Icon": "⛏️",
+        "Name": "Orbeyaykut - Iron Mining Town",
+        "Note": "Orbeyaykut é uma cidade mineira de 1250 pessoas perto da mina de ferro.",
+        "X": 829.83,
+        "Y": 352.04,
+        "Latitude": 36.95,
+        "Longitude": -8.49
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.49,
+          36.95
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker10",
+        "Type": "pontes",
+        "Icon": "🌉",
+        "Name": "Ponte Baberende",
+        "Note": "Uma ponte desgastada se estende por cima do rio Steam -Mand, perto de Baberende.",
+        "X": 523.4,
+        "Y": 657.07,
+        "Latitude": 17.06,
+        "Longitude": -28.47
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -28.47,
+          17.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "marcador11",
+        "Type": "pousadas",
+        "Icon": "🍻",
+        "Name": "A bela pousada",
+        "Note": "Uma grande e famosa pousada na estrada.O delicioso bolo de idade seca com kvass brancos é servida aqui.",
+        "X": 1251.74,
+        "Y": 509.25,
+        "Latitude": 26.7,
+        "Longitude": 19.02
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.02,
+          26.7
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker12",
+        "Type": "pousadas",
+        "Icon": "🍻",
+        "Name": "O cavalo rosa",
+        "Note": "Uma grande e famosa taberna na estrada.O delicioso cavalo marinado com leite doce é servido aqui.",
+        "X": 439.79,
+        "Y": 627.55,
+        "Latitude": 18.98,
+        "Longitude": -33.92
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -33.92,
+          18.98
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker13",
+        "Type": "pousadas",
+        "Icon": "🍻",
+        "Name": "A cotovia principal",
+        "Note": "Uma grande e famosa taberna na estrada.Deliciosas cotovia de pelúcia com tequila azeda é servida aqui.",
+        "X": 256.59,
+        "Y": 468.66,
+        "Latitude": 29.34,
+        "Longitude": -45.87
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -45.87,
+          29.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker14",
+        "Type": "pousadas",
+        "Icon": "🍻",
+        "Name": "A taberna favorável",
+        "Note": "Uma grande e famosa taberna na estrada.O delicioso alho cozido no vapor com néctar fedorento é servido aqui.",
+        "X": 521.25,
+        "Y": 685.54,
+        "Latitude": 15.2,
+        "Longitude": -28.61
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -28.61,
+          15.2
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker15",
+        "Type": "pousadas",
+        "Icon": "🍻",
+        "Name": "A cotovia justa",
+        "Note": "Uma grande e famosa taberna na estrada.Deliciosos codornas jegadas com cidra amarga é servida aqui.",
+        "X": 1106.2,
+        "Y": 552.96,
+        "Latitude": 23.85,
+        "Longitude": 9.53
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.53,
+          23.85
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker16",
+        "Type": "faróis",
+        "Icon": "🚨",
+        "Name": "Lighthouse de Elseguard",
+        "Note": "Um farol para servir como um farol para navios no mar aberto.",
+        "X": 664.12,
+        "Y": 822.85,
+        "Latitude": 6.25,
+        "Longitude": -19.29
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -19.29,
+          6.25
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker17",
+        "Type": "faróis",
+        "Icon": "🚨",
+        "Name": "Farol de Scorchilldean",
+        "Note": "Um farol para servir como um farol para navios no mar aberto.",
+        "X": 1083.17,
+        "Y": 825.17,
+        "Latitude": 6.1,
+        "Longitude": 8.03
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.03,
+          6.1
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker18",
+        "Type": "faróis",
+        "Icon": "🚨",
+        "Name": "Smootwatch Lighthouse",
+        "Note": "Um farol para servir como um farol para navios no mar aberto.",
+        "X": 696.05,
+        "Y": 859.19,
+        "Latitude": 3.88,
+        "Longitude": -17.21
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.21,
+          3.88
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker19",
+        "Type": "campos de batalha",
+        "Icon": "⚔️",
+        "Name": "Southgulch Battlefield",
+        "Note": "Uma Batalha Histórica da Expedição Sarpseliana. \r\nData: 1 de outubro de 327 Era Szok'su.",
+        "X": 715.32,
+        "Y": 594.02,
+        "Latitude": 21.17,
+        "Longitude": -15.96
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -15.96,
+          21.17
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker20",
+        "Type": "campos de batalha",
+        "Icon": "⚔️",
+        "Name": "Shaleneld Battlefield",
+        "Note": "Uma batalha histórica da invasão de Skaphris. \r\nData: 30 de junho de 1998 Era Szok'su.",
+        "X": 903.96,
+        "Y": 583.55,
+        "Latitude": 21.85,
+        "Longitude": -3.65
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.65,
+          21.85
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker21",
+        "Type": "campos de batalha",
+        "Icon": "⚔️",
+        "Name": "Buyayramde Battlefield",
+        "Note": "Uma batalha histórica da invasão de Skaphris. \r\nData: 10 de abril de 145 Era Szok'su.",
+        "X": 613.96,
+        "Y": 199.21,
+        "Latitude": 46.91,
+        "Longitude": -22.56
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -22.56,
+          46.91
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker22",
+        "Type": "masmorras",
+        "Icon": "🗝️",
+        "Name": "Masmorra",
+        "Note": "<div> masmorra não descoberta.Veja <a href = \"https://watabou.github.io/one-page-dungeon/?seed=255463332158\" Target = \"_ Blank\"> uma página masmorra </a> </div> <iframe style = \"Pointer-Events: Nenhum; \"src = \"https://watabou.github.io/one-page-dungeon/?seed=2554633332158\" sandbox = \"allow-scripts allow-same-original\"> </iframe>",
+        "X": 1288.54,
+        "Y": 283.0,
+        "Latitude": 41.45,
+        "Longitude": 21.42
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.42,
+          41.45
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker23",
+        "Type": "masmorras",
+        "Icon": "🗝️",
+        "Name": "Masmorra",
+        "Note": "<div> masmorra não descoberta.Veja <a href = \"https://watabou.github.io/one-page-dungeon/?seed=255463334540\" Target = \"_ Blank\"> uma página masmorra </a> </div> <iframe style = \"Pointer-Events: Nenhum; \"src = \"https://watabou.github.io/one-page-dungeon/?seed=2554633334540\" sandbox = \"allow-scripts allow-same-original\"> </iframe>",
+        "X": 1466.9,
+        "Y": 503.5,
+        "Latitude": 27.07,
+        "Longitude": 33.05
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.05,
+          27.07
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker24",
+        "Type": "masmorras",
+        "Icon": "🗝️",
+        "Name": "Masmorra",
+        "Note": "<div> masmorra não descoberta.Veja <a href = \"https://watabou.github.io/one-page-dungeon/?seed=25546333691\" Target = \"_ Blank\"> uma página masmorra </a> </div> <iframe style = \"pointer-Events: Nenhum; \"src = \"https://watabou.github.io/one-page-dungeon/?seed=25546333691\" sandbox = \"allow-scripts allow-same-original\"> </iframe>",
+        "X": 431.63,
+        "Y": 103.68,
+        "Latitude": 53.14,
+        "Longitude": -34.45
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -34.45,
+          53.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker25",
+        "Type": "masmorras",
+        "Icon": "🗝️",
+        "Name": "Masmorra",
+        "Note": "<div> masmorra não descoberta.Veja <a href = \"https://watabou.github.io/one-page-dungeon/?seed=255463332363\" Target = \"_ Blank\"> uma página masmorra </a> </div> <iframe style = \"Pointer-Events: Nenhum; \"src = \"https://watabou.github.io/one-page-dungeon/?seed=2554633332363\" sandbox = \"allow-scripts allow-same-original\"> </iframe>",
+        "X": 1206.81,
+        "Y": 316.55,
+        "Latitude": 39.26,
+        "Longitude": 16.09
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          16.09,
+          39.26
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker26",
+        "Type": "lago-monstros",
+        "Icon": "🐉",
+        "Name": "Khiz Monster",
+        "Note": "Os habitantes locais dizem que um monstro de relíquia de 10 m de comprimento habita o lago Khiz.Verdade ou mentira, as pessoas têm medo de pescar no lago.",
+        "X": 472.35,
+        "Y": 129.29,
+        "Latitude": 51.47,
+        "Longitude": -31.8
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -31.8,
+          51.47
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker27",
+        "Type": "lago-monstros",
+        "Icon": "🐉",
+        "Name": "Monstro de Dewgrasp",
+        "Note": "Os contos dizem que um monstro relíquia de 9 m de comprimento habita o lago DeWgrapp.Verdade ou mentira, as pessoas têm medo de pescar no lago.",
+        "X": 945.38,
+        "Y": 628.94,
+        "Latitude": 18.89,
+        "Longitude": -0.95
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.95,
+          18.89
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker28",
+        "Type": "lago-monstros",
+        "Icon": "🐉",
+        "Name": "ASLA Monster",
+        "Note": "Os anciãos dizem que um monstro relíquia de 17 m de comprimento habita o lago Asla.Verdade ou mentira, as pessoas têm medo de pescar no lago.",
+        "X": 1094.24,
+        "Y": 193.95,
+        "Latitude": 47.25,
+        "Longitude": 8.75
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.75,
+          47.25
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marcador 29",
+        "Type": "lago-monstros",
+        "Icon": "🐉",
+        "Name": "Smootmore Monster",
+        "Note": "As lendas dizem que um monstro relíquia de 7 m de comprimento habita o lago Smootmore.Verdade ou mentira, as pessoas têm medo de pescar no lago.",
+        "X": 1272.7,
+        "Y": 716.18,
+        "Latitude": 13.2,
+        "Longitude": 20.39
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.39,
+          13.2
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marcador30",
+        "Type": "lago-monstros",
+        "Icon": "🐉",
+        "Name": "Monstro de Nanuraram",
+        "Note": "Os habitantes locais dizem que um monstro relíquia de 23 m de comprimento habita o lago Nanuraram.Verdade ou mentira, as pessoas têm medo de pescar no lago.",
+        "X": 451.81,
+        "Y": 280.16,
+        "Latitude": 41.63,
+        "Longitude": -33.14
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -33.14,
+          41.63
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker31",
+        "Type": "lago-monstros",
+        "Icon": "🐉",
+        "Name": "Yaboy Monster",
+        "Note": "Os sussurros dizem que um monstro de relíquia de 6 m de comprimento habita o lago Yaboy.Verdade ou mentira, as pessoas têm medo de pescar no lago.",
+        "X": 551.13,
+        "Y": 227.07,
+        "Latitude": 45.09,
+        "Longitude": -26.66
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -26.66,
+          45.09
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker32",
+        "Type": "lago-monstros",
+        "Icon": "🐉",
+        "Name": "Amburnwell Monster",
+        "Note": "Os sussurros dizem que um monstro relíquia de 16 m de comprimento habita o lago Amburnwell.Verdade ou mentira, as pessoas têm medo de pescar no lago.",
+        "X": 812.55,
+        "Y": 571.67,
+        "Latitude": 22.63,
+        "Longitude": -9.61
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -9.61,
+          22.63
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker33",
+        "Type": "lago-monstros",
+        "Icon": "🐉",
+        "Name": "Monstro de Duvazaguz",
+        "Note": "Os sussurros dizem que um monstro relíquia de 15 m de comprimento habita o lago Duvazoguz.Verdade ou mentira, as pessoas têm medo de pescar no lago.",
+        "X": 779.15,
+        "Y": 209.8,
+        "Latitude": 46.22,
+        "Longitude": -11.79
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -11.79,
+          46.22
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker34",
+        "Type": "lago-monstros",
+        "Icon": "🐉",
+        "Name": "Monstro Edbaymouth",
+        "Note": "Os rumores dizem que um monstro relíquia de 8 m de comprimento habita o lago Edbaymouth.Verdade ou mentira, as pessoas têm medo de pescar no lago.",
+        "X": 1051.91,
+        "Y": 581.22,
+        "Latitude": 22.0,
+        "Longitude": 5.99
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.99,
+          22.0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker35",
+        "Type": "monstros do mar",
+        "Icon": "🦑",
+        "Name": "Magelton Monster",
+        "Note": "Marinheiros antigos contam histórias de um monstro marinho gigantesco que habita essas águas perigosas.Os rumores dizem que pode ter 16 m de comprimento.",
+        "X": 246.33,
+        "Y": 631.21,
+        "Latitude": 18.74,
+        "Longitude": -46.54
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -46.54,
+          18.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker36",
+        "Type": "monstros da colina",
+        "Icon": "👹",
+        "Name": "Akayayada barbold diabo",
+        "Note": "Tipplers falam de um horrível diabo barbudo que habita as colinas de Akayayada e prefere comer crianças.",
+        "X": 495.45,
+        "Y": 465.35,
+        "Latitude": 29.56,
+        "Longitude": -30.29
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -30.29,
+          29.56
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marcador 37",
+        "Type": "monstros da colina",
+        "Icon": "👹",
+        "Name": "Boyvarli mortos -vivos",
+        "Note": "Os habitantes locais falam de um morto -vivo sortudo que habita as colinas de Boyvarli e mantém a região afastada.",
+        "X": 862.11,
+        "Y": 235.08,
+        "Latitude": 44.57,
+        "Longitude": -6.38
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.38,
+          44.57
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker38",
+        "Type": "monstros da colina",
+        "Icon": "👹",
+        "Name": "Yayantay Ghoul",
+        "Note": "Os sussurros falam de um ghoul mágico que habita as colinas de Yayantay e come crianças inteiras.",
+        "X": 975.02,
+        "Y": 192.97,
+        "Latitude": 47.32,
+        "Longitude": 0.98
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.98,
+          47.32
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker39",
+        "Type": "florestas sagradas",
+        "Icon": "🌳",
+        "Name": "Floresta de GrinePond",
+        "Note": "Uma floresta sagrada para o nuvem local.",
+        "X": 698.48,
+        "Y": 768.89,
+        "Latitude": 9.77,
+        "Longitude": -17.05
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.05,
+          9.77
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker40",
+        "Type": "pinças sagradas",
+        "Icon": "🌲",
+        "Name": "Curdeneld Pinery",
+        "Note": "Um Pinery sagrado para os antepassados ​​locais (humanos).",
+        "X": 1191.51,
+        "Y": 890.89,
+        "Latitude": 1.81,
+        "Longitude": 15.1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.1,
+          1.81
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker41",
+        "Type": "groves sagrados",
+        "Icon": "🌴",
+        "Name": "Vulakse Palm Grove",
+        "Note": "Um Palm Grove sagrado para o robusto local (humano) xamanismo.",
+        "X": 228.5,
+        "Y": 296.4,
+        "Latitude": 40.57,
+        "Longitude": -47.7
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.7,
+          40.57
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker42",
+        "Type": "bandidos",
+        "Icon": "💰",
+        "Name": "Badgers de Snakenbell",
+        "Note": "Uma gangue de ladrões de floresta.",
+        "X": 1233.34,
+        "Y": 539.82,
+        "Latitude": 24.7,
+        "Longitude": 17.82
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.82,
+          24.7
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker43",
+        "Type": "bandidos",
+        "Icon": "💰",
+        "Name": "Faveneldge Foxes",
+        "Note": "Uma gangue de bandidos florestais.",
+        "X": 1247.7,
+        "Y": 537.79,
+        "Latitude": 24.83,
+        "Longitude": 18.76
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.76,
+          24.83
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker44",
+        "Type": "bandidos",
+        "Icon": "💰",
+        "Name": "Cães de madeira morta",
+        "Note": "Uma gangue de bandidos montados.",
+        "X": 758.04,
+        "Y": 627.91,
+        "Latitude": 18.96,
+        "Longitude": -13.17
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -13.17,
+          18.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker45",
+        "Type": "piratas",
+        "Icon": "🏴‍☠️",
+        "Name": "Piratas",
+        "Note": "Os navios piratas foram vistos nessas águas.",
+        "X": 231.38,
+        "Y": 89.25,
+        "Latitude": 54.08,
+        "Longitude": -47.51
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.51,
+          54.08
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker46",
+        "Type": "piratas",
+        "Icon": "🏴‍☠️",
+        "Name": "Piratas",
+        "Note": "Os navios piratas foram vistos nessas águas.",
+        "X": 1338.15,
+        "Y": 488.38,
+        "Latitude": 28.06,
+        "Longitude": 24.66
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.66,
+          28.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker47",
+        "Type": "estátuas",
+        "Icon": "🗿",
+        "Name": "Alapatiken Obelisk",
+        "Note": "Um obelisco antigo.Tem uma inscrição, mas ninguém pode traduzi -lo:\n<div style = \"font-size: 1.8em; quebra de linha: em qualquer lugar;\"> ⲹⲹ ⳙ⳩ⳝⳃⳉⳇⳗⳃⳮ⳪ⳣⲻⳡⳅⳋⳙⳋⲽⳝⳁⳉⲳ ⳋⳍⳙⳉⳓⳳⳤⳮ⳩ⳬⳑⳅ⳹ⳃ⳾ⳕ⳩ⳓ⳪ⳟⲽⳍⳬ ⳝⳟⳬⲳⲵⳏⳓⳳⳝⳝⳅⳅⳤⳁ⳥ⳇ⳥ ⲽⳟⲷⳑⳃⳁ⳥ⳉⳳ⳹ⳕⲳ </div>",
+        "X": 259.32,
+        "Y": 491.27,
+        "Latitude": 27.87,
+        "Longitude": -45.69
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -45.69,
+          27.87
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker48",
+        "Type": "estátuas",
+        "Icon": "🗿",
+        "Name": "Escultura Depeyozyol",
+        "Note": "Uma escultura antiga.Tem uma inscrição, mas ninguém pode traduzi -lo:\n<div style = \"font-size: 1.8em; quebra de linha: em qualquer lugar;\"> ༈༤༸༨༯༺༭༧༺༷༮༽༯༊༁༻༻༣༮༲༻༺༓༉༈༂༺༺༾༚༑༓༈༖༒༴༷༺༓༿༐༠༂༓༉༼༯༡༙༯༶༡༣༑༑༊༵༐༬༦༽༮༨༾༷༄༾༵༼༡༡ </div>",
+        "X": 281.33,
+        "Y": 154.27,
+        "Latitude": 49.84,
+        "Longitude": -44.25
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -44.25,
+          49.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker49",
+        "Type": "estátuas",
+        "Icon": "🗿",
+        "Name": "Ídolo de Sillowbay",
+        "Note": "Um ídolo antigo.Tem uma inscrição, mas ninguém pode traduzi -lo:\n<div style = \"font-size: 1.8em; quebra de linha: em qualquer lugar;\"> ነዘአተኀከጸዘ ደዐሐፈመዘጸኀፈገሠጰተጠኀዘገአገዐጸመ በየሠለለነበተአ ፀየተበተነጠዐሐተዘየቀተሠፀ </div>",
+        "X": 1619.4,
+        "Y": 470.8,
+        "Latitude": 29.2,
+        "Longitude": 43.0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.0,
+          29.2
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marcador50",
+        "Type": "ruínas",
+        "Icon": "🏺",
+        "Name": "Posto avançado em ruínas",
+        "Note": "Ruínas de um posto avançado antigo.Riquezas incalculáveis ​​podem estar dentro.",
+        "X": 1092.49,
+        "Y": 162.73,
+        "Latitude": 49.29,
+        "Longitude": 8.64
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.64,
+          49.29
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker51",
+        "Type": "ruínas",
+        "Icon": "🏺",
+        "Name": "Cidade em ruínas",
+        "Note": "Ruínas de uma cidade antiga.Riquezas incalculáveis ​​podem estar dentro.",
+        "X": 949.66,
+        "Y": 393.2,
+        "Latitude": 34.26,
+        "Longitude": -0.67
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.67,
+          34.26
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker52",
+        "Type": "ruínas",
+        "Icon": "🏺",
+        "Name": "Templo arruinado",
+        "Note": "Ruínas de um templo antigo.Riquezas incalculáveis ​​podem estar dentro.",
+        "X": 1489.27,
+        "Y": 464.94,
+        "Latitude": 29.58,
+        "Longitude": 34.51
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          34.51,
+          29.58
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker53",
+        "Type": "ruínas",
+        "Icon": "🏺",
+        "Name": "Site sagrado em ruínas",
+        "Note": "Ruínas de um antigo local sagrado.Riquezas incalculáveis ​​podem estar dentro.",
+        "X": 551.05,
+        "Y": 210.04,
+        "Latitude": 46.2,
+        "Longitude": -26.67
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -26.67,
+          46.2
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker54",
+        "Type": "Bibliotecas",
+        "Icon": "📚",
+        "Name": "Biblioteca Nulnulnulbu",
+        "Note": "Uma vasta coleção de conhecimentos, incluindo muitos tomos raros e antigos.",
+        "X": 444.78,
+        "Y": 263.0,
+        "Latitude": 42.75,
+        "Longitude": -33.6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -33.6,
+          42.75
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker55",
+        "Type": "circos",
+        "Icon": "🎪",
+        "Name": "Viajar circo incompreensível",
+        "Note": "Enrole, enrole, este circo incompreensível está aqui por apenas um tempo limitado.",
+        "X": 844.71,
+        "Y": 652.35,
+        "Latitude": 17.36,
+        "Longitude": -7.52
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.52,
+          17.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker56",
+        "Type": "circos",
+        "Icon": "🎪",
+        "Name": "Viajar circo imperdível",
+        "Note": "Enrole, enrole, este circo imperdível está aqui apenas por um tempo limitado.",
+        "X": 1187.6,
+        "Y": 33.3,
+        "Latitude": 57.73,
+        "Longitude": 14.84
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.84,
+          57.73
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker57",
+        "Type": "Joustts",
+        "Icon": "🤺",
+        "Name": "Competição Yaztoptar",
+        "Note": "Os guerreiros de todo o país se reúnem para uma competição de perspicácia em Yaztoptar, com fama, fortuna e favor oferecido ao vencedor.",
+        "X": 657.77,
+        "Y": 554.38,
+        "Latitude": 23.75,
+        "Longitude": -19.71
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -19.71,
+          23.75
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker58",
+        "Type": "feiras",
+        "Icon": "🎠",
+        "Name": "Feira Dewbaymouth",
+        "Note": "Uma feira está sendo realizada em Dewbaymouth, com todos os tipos de bens e serviços locais e estrangeiros oferecidos.",
+        "X": 1433.95,
+        "Y": 377.86,
+        "Latitude": 35.26,
+        "Longitude": 30.91
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.91,
+          35.26
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker59",
+        "Type": "canoas",
+        "Icon": "🛶",
+        "Name": "Menor de cais",
+        "Note": "Uma pequena localização ao longo do Fork Taynak para lançar barcos a partir de senta aqui, junto com um proprietário cansado, disposto a vender passagem ao longo do rio.",
+        "X": 957.21,
+        "Y": 334.27,
+        "Latitude": 38.1,
+        "Longitude": -0.18
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.18,
+          38.1
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker60",
+        "Type": "migração",
+        "Icon": "🐗",
+        "Name": "Migração de cotozinhas",
+        "Note": "Um enorme grupo de cotovias está migrando, seja parte de sua rotina anual ou algo mais extraordinário.",
+        "X": 1036.23,
+        "Y": 78.35,
+        "Latitude": 54.79,
+        "Longitude": 4.97
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.97,
+          54.79
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker61",
+        "Type": "Danças",
+        "Icon": "💃🏽",
+        "Name": "Celebração de Aurymouth",
+        "Note": "Uma celebração foi organizada em Aurymouth como uma chance de reunir o grande e o bem da área para ser alegre, fazer alianças e esquemas em torno da crise.",
+        "X": 1046.04,
+        "Y": 611.99,
+        "Latitude": 20.0,
+        "Longitude": 5.61
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.61,
+          20.0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker62",
+        "Type": "miragem",
+        "Icon": "💦",
+        "Name": "Miragem peculiar",
+        "Note": "Esta miragem perculiar tem atraído os viajantes do seu caminho por eras.",
+        "X": 289.31,
+        "Y": 215.91,
+        "Latitude": 45.82,
+        "Longitude": -43.73
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.73,
+          45.82
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker63",
+        "Type": "cavernas",
+        "Icon": "🦇",
+        "Name": "Equipamento de Yakesen",
+        "Note": "O buraco do Yakesen.Os habitantes locais afirmam que está totalmente vazio.",
+        "X": 960.31,
+        "Y": 136.22,
+        "Latitude": 51.02,
+        "Longitude": 0.02
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.02,
+          51.02
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker64",
+        "Type": "cavernas",
+        "Icon": "🦇",
+        "Name": "Fratura de Maldrith",
+        "Note": "A fratura de Maldrith.Os habitantes locais afirmam que é o lar de monstros estranhos.",
+        "X": 1120.95,
+        "Y": 118.14,
+        "Latitude": 52.2,
+        "Longitude": 10.5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.5,
+          52.2
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker65",
+        "Type": "Portais",
+        "Icon": "🌀",
+        "Name": "Portal TimerCairn",
+        "Note": "Um elemento do sistema de portal mágico que conecta as principais cidades.Os portais foram instalados séculos atrás, mas ainda funcionam bem.",
+        "X": 1322.02,
+        "Y": 44.42,
+        "Latitude": 57.0,
+        "Longitude": 23.61
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.61,
+          57.0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker66",
+        "Type": "Portais",
+        "Icon": "🌀",
+        "Name": "Portal Mondwatch",
+        "Note": "Um elemento do sistema de portal mágico que conecta as principais cidades.Os portais foram instalados séculos atrás, mas ainda funcionam bem.",
+        "X": 839.33,
+        "Y": 734.45,
+        "Latitude": 12.01,
+        "Longitude": -7.87
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.87,
+          12.01
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker67",
+        "Type": "Portais",
+        "Icon": "🌀",
+        "Name": "Portal de Kovaya",
+        "Note": "Um elemento do sistema de portal mágico que conecta as principais cidades.Os portais foram instalados séculos atrás, mas ainda funcionam bem.",
+        "X": 1160.86,
+        "Y": 186.51,
+        "Latitude": 47.74,
+        "Longitude": 13.1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.1,
+          47.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker68",
+        "Type": "Portais",
+        "Icon": "🌀",
+        "Name": "IMESHAND PORTAL",
+        "Note": "Um elemento do sistema de portal mágico que conecta as principais cidades.Os portais foram instalados séculos atrás, mas ainda funcionam bem.",
+        "X": 850.14,
+        "Y": 678.78,
+        "Latitude": 15.64,
+        "Longitude": -7.16
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.16,
+          15.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker69",
+        "Type": "Portais",
+        "Icon": "🌀",
+        "Name": "Portal Lightlec",
+        "Note": "Um elemento do sistema de portal mágico que conecta as principais cidades.Os portais foram instalados séculos atrás, mas ainda funcionam bem.",
+        "X": 1121.11,
+        "Y": 627.4,
+        "Latitude": 18.99,
+        "Longitude": 10.51
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.51,
+          18.99
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker70",
+        "Type": "Portais",
+        "Icon": "🌀",
+        "Name": "Portal Undizindus",
+        "Note": "Um elemento do sistema de portal mágico que conecta as principais cidades.Os portais foram instalados séculos atrás, mas ainda funcionam bem.",
+        "X": 350.65,
+        "Y": 121.49,
+        "Latitude": 51.98,
+        "Longitude": -39.73
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -39.73,
+          51.98
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker71",
+        "Type": "Portais",
+        "Icon": "🌀",
+        "Name": "Portal IPJI",
+        "Note": "Um elemento do sistema de portal mágico que conecta as principais cidades.Os portais foram instalados séculos atrás, mas ainda funcionam bem.",
+        "X": 314.5,
+        "Y": 109.44,
+        "Latitude": 52.76,
+        "Longitude": -42.09
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -42.09,
+          52.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker72",
+        "Type": "brecha",
+        "Icon": "🎆",
+        "Name": "Brecha cósmica",
+        "Note": "Uma fenda cósmica nessa área está causando rachaduras na realidade.",
+        "X": 425.41,
+        "Y": 123.57,
+        "Latitude": 51.84,
+        "Longitude": -34.86
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -34.86,
+          51.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker73",
+        "Type": "Buriais perturbados",
+        "Icon": "💀",
+        "Name": "Enterro perturbado",
+        "Note": "Um local do enterro foi perturbado nessa área, fazendo com que os mortos subam e atacassem os vivos.",
+        "X": 819.3,
+        "Y": 596.83,
+        "Latitude": 20.98,
+        "Longitude": -9.17
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -9.17,
+          20.98
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker74",
+        "Type": "Buriais perturbados",
+        "Icon": "💀",
+        "Name": "Enterro perturbado",
+        "Note": "Um local do enterro foi perturbado nessa área, fazendo com que os mortos subam e atacassem os vivos.",
+        "X": 1271.45,
+        "Y": 371.53,
+        "Latitude": 35.68,
+        "Longitude": 20.31
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.31,
+          35.68
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker75",
+        "Type": "necrópolis",
+        "Icon": "🪦",
+        "Name": "Sahryrionat necrópolis",
+        "Note": "Uma necrópole labiríntica, onde cada etapa ecoa com murmúrios assustadores.As paredes são adornadas com runas antigas, e os espíritos inquietos guiam ou impedem aqueles que se atrevem a mergulhar em suas profundezas.",
+        "X": 1070.19,
+        "Y": 73.29,
+        "Latitude": 55.12,
+        "Longitude": 7.19
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.19,
+          55.12
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker76",
+        "Type": "Encontros",
+        "Icon": "🧙",
+        "Name": "Encontro aleatório",
+        "Note": "<div> Você encontrou um personagem.A mesma origem de origem-POPUPS \"> </frame>",
+        "X": 1218.56,
+        "Y": 631.42,
+        "Latitude": 18.73,
+        "Longitude": 16.86
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          16.86,
+          18.73
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker77",
+        "Type": "Encontros",
+        "Icon": "🧙",
+        "Name": "Encontro aleatório",
+        "Note": "<div> Você encontrou um personagem.A mesma origem de origem-POPUPS \"> </frame>",
+        "X": 358.72,
+        "Y": 78.14,
+        "Latitude": 54.81,
+        "Longitude": -39.21
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -39.21,
+          54.81
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker78",
+        "Type": "Encontros",
+        "Icon": "🧙",
+        "Name": "Encontro aleatório",
+        "Note": "<div> Você encontrou um personagem.A mesma origem de origem-POPUPS \"> </frame>",
+        "X": 906.72,
+        "Y": 353.29,
+        "Latitude": 36.86,
+        "Longitude": -3.47
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.47,
+          36.86
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker79",
+        "Type": "Encontros",
+        "Icon": "🧙",
+        "Name": "Encontro aleatório",
+        "Note": "<div> Você encontrou um personagem.A mesma origem de origem-POPUPS \"> </frame>",
+        "X": 1208.34,
+        "Y": 581.34,
+        "Latitude": 21.99,
+        "Longitude": 16.19
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          16.19,
+          21.99
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker80",
+        "Type": "Encontros",
+        "Icon": "🧙",
+        "Name": "Encontro aleatório",
+        "Note": "<div> Você encontrou um personagem.A mesma origem de origem-POPUPS \"> </frame>",
+        "X": 876.88,
+        "Y": 98.66,
+        "Latitude": 53.47,
+        "Longitude": -5.42
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.42,
+          53.47
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker81",
+        "Type": "Encontros",
+        "Icon": "🧙",
+        "Name": "Encontro aleatório",
+        "Note": "<div> Você encontrou um personagem.A mesma origem de origem-POPUPS \"> </frame>",
+        "X": 832.12,
+        "Y": 431.37,
+        "Latitude": 31.77,
+        "Longitude": -8.34
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.34,
+          31.77
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker82",
+        "Type": "Encontros",
+        "Icon": "🧙",
+        "Name": "Encontro aleatório",
+        "Note": "<div> Você encontrou um personagem.A mesma origem de origem-POPUPS \"> </frame>",
+        "X": 602.1,
+        "Y": 103.84,
+        "Latitude": 53.13,
+        "Longitude": -23.34
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -23.34,
+          53.13
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Id": "Marker83",
+        "Type": "Encontros",
+        "Icon": "🧙",
+        "Name": "Encontro aleatório",
+        "Note": "<div> Você encontrou um personagem.A mesma origem de origem-POPUPS \"> </frame>",
+        "X": 350.09,
+        "Y": 459.93,
+        "Latitude": 29.91,
+        "Longitude": -39.77
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -39.77,
+          29.91
+        ]
+      }
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aethralis Map</title>
@@ -8,6 +9,10 @@
     <!-- Incluir Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Scripts do Leaflet (deve ser carregado primeiro) -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.js"></script>
 
     <!-- Incluir o CSS personalizado -->
     <link rel="stylesheet" href="css/styles.css">
@@ -17,16 +22,12 @@
 
     <!-- Biblioteca para controle de camadas agrupadas -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.css"/>
-    
 
+    
 </head>
 <body>
 
     <div id="map"></div>
-
-    <!-- Scripts do Leaflet -->
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.js"></script>
 
     <!-- Scripts separados -->
     <script src="js/map.js"></script>
@@ -40,6 +41,10 @@
         loadRivers();    // Carregar os rios
         loadCities();    // Carregar as cidades
         loadBiomes();    // Carregar os biomas
+        loadCultures();  // Carregar as células das culturas
+        loadStates();  // Carregar as células dos estados
+        
+
     </script>
 </body>
 </html>

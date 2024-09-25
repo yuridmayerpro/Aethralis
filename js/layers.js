@@ -110,7 +110,7 @@ var biomeLegend;  // Variável global para a legenda
 // Função para exibir a legenda dos biomas
 function showBiomeLegend(biomeColors) {
     if (!biomeLegend) {
-        biomeLegend = L.control({ position: 'bottomright' });
+        biomeLegend = L.control({ position: 'bottomleft' });
 
         biomeLegend.onAdd = function () {
             var div = L.DomUtil.create('div', 'biome-legend');
@@ -134,3 +134,66 @@ function hideBiomeLegend() {
     }
 }
 
+
+
+
+
+var cultureLegend;  // Variável global para a legenda
+
+// Função para exibir a legenda das culturas
+function showCultureLegend(cultureColors) {
+    if (!cultureLegend) {
+        cultureLegend = L.control({ position: 'bottomleft' });
+
+        cultureLegend.onAdd = function () {
+            var div = L.DomUtil.create('div', 'biome-legend');
+            div.innerHTML = '<h4>Culturas</h4>';
+            for (const cultureId in cultureColors) {
+                const culture = cultureColors[cultureId];
+                div.innerHTML += `<i style="background:${culture.color}"></i> ${culture.name}<br>`;
+            }
+            return div;
+        };
+
+        cultureLegend.addTo(map);
+    }
+}
+
+// Função para esconder a legenda das culturas
+function hideCultureLegend() {
+    if (cultureLegend) {
+        map.removeControl(cultureLegend);
+        cultureLegend = null;
+    }
+}
+
+
+
+var stateLegend;  // Variável global para a legenda
+
+// Função para exibir a legenda dos estados
+function showStateLegend(stateColors) {
+    if (!stateLegend) {
+        stateLegend = L.control({ position: 'bottomleft' });  // Posição ajustada para a esquerda
+
+        stateLegend.onAdd = function () {
+            var div = L.DomUtil.create('div', 'state-legend');
+            div.innerHTML = '<h4>Estados</h4>';
+            for (const stateId in stateColors) {
+                const state = stateColors[stateId];
+                div.innerHTML += `<i style="background:${state.color}"></i> ${state.name}<br>`;
+            }
+            return div;
+        };
+
+        stateLegend.addTo(map);
+    }
+}
+
+// Função para esconder a legenda dos estados
+function hideStateLegend() {
+    if (stateLegend) {
+        map.removeControl(stateLegend);
+        stateLegend = null;
+    }
+}

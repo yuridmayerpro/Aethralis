@@ -18,4 +18,3 @@ var groupedLayersControl = L.control.groupedLayers(null, {}, {
     groupCheckboxes: true
 }).addTo(map);
 
-
