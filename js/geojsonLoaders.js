@@ -26,6 +26,21 @@ function updateLegend(colors) {
     legend.addTo(map);
 }
 
+// Função para exibir o popup com o nome do recurso específico
+function bindLayerPopup(layer, colors, propertyName) {
+    layer.on('click', function (event) {
+        var feature = event.layer.feature;
+        var id = feature.properties[propertyName];  // Pega o ID do bioma/cultura/estado
+        var name = colors[id] ? colors[id].name : 'Nome não disponível';
+
+        var popupContent = '<b>Nome: </b>' + name;
+        L.popup()
+            .setLatLng(event.latlng)
+            .setContent(popupContent)
+            .openOn(map);
+    });
+}
+
 async function loadMarkers() {
     try {
         const response = await fetch('map_data/Aethralis Markers pt.geojson');
@@ -220,6 +235,9 @@ async function loadBiomes() {
 
         layerGroups['Biomas'] = biomeLayer;
 
+        // Adicionar popup ao clicar na camada, mostrando o nome do bioma
+        bindLayerPopup(biomeLayer, window.biomeColors, 'biome');
+
     } catch (error) {
         console.error('Erro ao carregar os biomas:', error);
     }
@@ -257,6 +275,9 @@ async function loadCultures() {
         });
 
         layerGroups['Culturas'] = cultureLayer;
+
+        // Adicionar popup ao clicar na camada, mostrando o nome da cultura
+        bindLayerPopup(cultureLayer, window.cultureColors, 'culture');
 
     } catch (error) {
         console.error('Erro ao carregar as culturas:', error);
@@ -296,6 +317,9 @@ async function loadStates() {
 
         layerGroups['Estados'] = stateLayer;
 
+        // Adicionar popup ao clicar na camada, mostrando o nome do estado
+        bindLayerPopup(stateLayer, window.stateColors, 'state');
+        
     } catch (error) {
         console.error('Erro ao carregar os estados:', error);
     }

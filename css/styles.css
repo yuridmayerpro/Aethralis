@@ -6,6 +6,7 @@ body, html, #map {
     height: 100%;
     font-family: 'Cinzel', cursive;
     color: #3E3E4B;
+    background-color: #c1ba9c;
 }
 
 /* Personalizar os textos de popups e tooltips */
