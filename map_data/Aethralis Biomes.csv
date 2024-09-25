@@ -1,13 +1,13 @@
 Id,Biome,Color,Habitability,Cells,Area km2,Population
 8,Floresta tropical temperada,#409c43,90%,1460,1782270,15301497
-6,Temperate deciduous forest,#29bc56,75%,1132,1664136,11819156
+6,Floresta decídua temperada,#29bc56,75%,1132,1664136,11819156
 9,Taiga,#4b6b32,12%,885,1341693,13277308
-12,Wetland,#0b9131,12%,627,739602,6648001
-11,Glacier,#d5e7eb,0%,407,671859,311137
+12,Pântano,#0b9131,12%,627,739602,6648001
+11,Geleira,#d5e7eb,0%,407,671859,311137
 10,Tundra,#96784b,4%,181,294921,2600395
-4,Grassland,#c8d68f,100%,166,243081,1856588
-1,Hot desert,#fbe79f,4%,0,0,0
-2,Cold desert,#b5b887,10%,0,0,0
-3,Savanna,#d2d082,22%,0,0,0
-5,Tropical seasonal forest,#b6d95d,50%,0,0,0
-7,Tropical rainforest,#7dcb35,80%,0,0,0
+4,Pastagem,#c8d68f,100%,166,243081,1856588
+1,Deserto quente,#fbe79f,4%,0,0,0
+2,Deserto frio,#b5b887,10%,0,0,0
+3,Savana,#d2d082,22%,0,0,0
+5,Floresta tropical sazonal,#b6d95d,50%,0,0,0
+7,Floresta tropical úmida,#7dcb35,80%,0,0,0
