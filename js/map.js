@@ -2,7 +2,7 @@
 var map = L.map('map', {
     minZoom: 4,
     maxZoom: 8
-}).setView([35.2016, 0], 4);
+}).setView([35.2016, 0], 4); 
 
 // Camada base especificada, também com zoom mínimo
 var tilesource_layer = L.tileLayer('map/{z}/{x}/{y}.png', {
