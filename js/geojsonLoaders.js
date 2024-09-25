@@ -1,3 +1,5 @@
+
+
 // Função para carregar o GeoJSON dos Pontos de Interesse (POIs)
 function loadMarkers() {
     fetch('map_data/Aethralis Markers pt.geojson')
@@ -34,10 +36,6 @@ function loadMarkers() {
         })
         .catch(error => console.error('Erro ao carregar o GeoJSON dos Pontos de Interesse:', error));
 }
-
-
-
-
 
 // Função para aplicar estilo em negrito à opção "Pontos de Interesse"
 function applyBoldStyleToLayers() {
